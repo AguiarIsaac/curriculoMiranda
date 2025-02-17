@@ -6,4 +6,8 @@ import { Injectable } from '@angular/core';
 export class EnviaFormService {
 
   constructor() { }
+
+  teste(event: any){
+    console.log(event);
+  }
 }
