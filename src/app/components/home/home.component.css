@@ -1,6 +1,61 @@
 :host {
+    align-content: center;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    width: 100%;
+    padding-left: 251px;
+    padding-right: 251px;
+}
+
+.ui-container {
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.87);
+    display: block;
+    max-width: 100%;
+    width: 1320px;
+    min-width: fit-content;
+}
+
+.form-container {
+    display: grid;
+    grid-template-rows: auto;
+    gap: 8px;
+}
+
+.input-column-2 {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 12px;
+}
+
+.input-column-3 {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 12px;
+}
+
+.radio-column-2 {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
+
+.radio-column-3 {
+    display: grid;
+    grid-template-columns: 35% 35% 25%;
+    grid-gap: 12px;
+}
+
+.radio-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 12px;
+}
+
+.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+    margin-left: 16px;
   }
+  
+/* 
+td {
+    padding-left: 12px;
+  } */
