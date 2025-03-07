@@ -1,17 +1,13 @@
 <div class="ui-container">
     <h1>Cadastre seu Currículo</h1>
 
-    <mat-accordion>
+    <mat-tab-group dynamicHeight>
         <!-- Começo Dados Pessoais -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>Dados Pessoais</mat-panel-title>
-                <mat-panel-description>Insira seus dados pessoais</mat-panel-description>
-            </mat-expansion-panel-header>
+        <mat-tab label="Dados Pessoais">
 
             <form class="form-container">
                 <!-- Input nome -->
-                <mat-form-field [appearance]="'outline'">
+                <mat-form-field id="nome-form">
                     <mat-label>Nome:</mat-label>
                     <input matInput [formControl]="nomeVal" required>
                     @if (nomeVal.invalid && nomeVal.touched) {
@@ -21,7 +17,7 @@
 
                 <div class="radio-column-3">
                     <!-- Input data -->
-                    <mat-form-field>
+                    <mat-form-field id="data-form">
                         <mat-label>Data de Nascimento:</mat-label>
                         <input matInput [matDatepicker]="picker" [formControl]="dataVal" required>
                         <mat-hint>MM/DD/YYYY</mat-hint>
@@ -33,23 +29,23 @@
                     </mat-form-field>
 
                     <!-- Input estado civil -->
-                    <mat-form-field>
+                    <mat-form-field id="ec-form">
                         <mat-label>Estado Civil</mat-label>
                         <mat-select [formControl]="ecVal" required>
-                          @for (ec of estCiv; track ec) {
+                            @for (ec of estCiv; track ec) {
                             <mat-option [value]="ec.value">{{ec.viewValue}}</mat-option>
-                          }
+                            }
                         </mat-select>
                         @if (ecVal.invalid && ecVal.touched) {
                             <mat-error>O campo é obrigatório!</mat-error>
                         }
-                      </mat-form-field>
+                    </mat-form-field>
 
                     <!-- Input sexo -->
-                    <div class="radio-container">
+                    <div class="radio-container" id="gender-form">
                         <label>Sexo: </label>
                         <mat-radio-group>
-                          <mat-radio-button value="F">Feminino</mat-radio-button>
+                          <mat-radio-button value="F" checked>Feminino</mat-radio-button>
                           <mat-radio-button value="M">Masculino</mat-radio-button>
                         </mat-radio-group>
                     </div>
@@ -57,19 +53,25 @@
 
                 <div class="input-column-2">
                     <!-- Input rg -->
-                    <mat-form-field>
+                    <mat-form-field id="rg-form">
                         <mat-label>RG:</mat-label>
-                        <input matInput [formControl]="rgVal" (input)="formatRg($event)" placeholder="Ex: 123.456.789-0" required>
-                        @if (rgVal.invalid && rgVal.touched) {
-                            <mat-error>{{ rgError }}</mat-error>
-                        }
+                        <input matInput [formControl]="rgVal" (input)="formatRg($event)" placeholder="Ex: 12.345.678-9" required>
+                            @if (rgVal.hasError('required') && rgVal.touched) {
+                                <mat-error>Preencha o campo antes de continuar!</mat-error>
+                            } @else if (rgVal.hasError('minlength')) {
+                                <mat-error>Formato inválido. Use: 99.999.999-9</mat-error>
+                            }
                     </mat-form-field>
 
-                <!-- Parei aqui (19/02/2025) -->
-                    <mat-form-field>
-                        <!-- Input cpf -->
+                    <!-- Input cpf -->
+                    <mat-form-field id="cpf-form">
                         <mat-label>CPF:</mat-label>
-                        <input matInput required>
+                        <input matInput [formControl]="cpfVal" (input)="formatCpf($event)" placeholder="Ex: 123.456.789-00" required>
+                            @if (cpfVal.hasError('required') && cpfVal.touched) {
+                                <mat-error>Preencha o campo antes de continuar!</mat-error>
+                            } @else if (cpfVal.hasError('minlength')) {
+                                <mat-error>Formato inválido. Use: 999.999.999-99</mat-error>
+                            }
                     </mat-form-field>
                 </div>
 
@@ -77,34 +79,44 @@
                     <!-- Input CNH? -->
                     <div class="radio-container" style="justify-content: flex-start">
                         <label>Possui CNH?: </label>
-                        <mat-radio-group>
+                        <mat-radio-group (change)="trocarTitulo()">
                           <mat-radio-button value="S">Sim</mat-radio-button>
-                          <mat-radio-button value="N">Não</mat-radio-button>
+                          <mat-radio-button value="N" checked>Não</mat-radio-button>
                         </mat-radio-group>
                     </div>
+
+                    <!-- Parei aqui (07/03) -->
 
                     <!-- Input categoria cnh -->
                     <mat-form-field>
                         <mat-label>Categoria CNH:</mat-label>
-                        <input matInput>
+                        <mat-select [disabled]="desativarCnh" [formControl]="catCnhVal" multiple >
+                            @for (cat of categoriasCnh; track cat) {
+                                <mat-option [value]="cat">{{cat}}</mat-option>
+                            }
+                        </mat-select>
                     </mat-form-field>
                 </div>
             </form>
 
             <!-- Botão próximo painel (não implementado) -->
-            <mat-action-row>
-                <button>Próximo</button>
-            </mat-action-row>
+            <div class="button-container">
+                <button mat-raised-button
+                        style="margin-right: 12px;">
+                    Próximo
+                </button>
 
-        </mat-expansion-panel>
+                <button mat-raised-button
+                        style="margin-right: 12px;"
+                        disabled>
+                    Anterior
+                </button>
+            </div>
+
+        </mat-tab>
 
         <!-- Começo Endereço -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>Endereço</mat-panel-title>
-                <mat-panel-description>Informações sobre endereço</mat-panel-description>
-            </mat-expansion-panel-header>
-
+        <mat-tab label="Endereço">
 
             <form class="form-container">
                 <mat-form-field>
@@ -138,14 +150,10 @@
                 </mat-form-field>
             </form>
 
-        </mat-expansion-panel>
+        </mat-tab>
 
         <!-- Começo Contato -->
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>Informações para Contato</mat-panel-title>
-                <mat-panel-description></mat-panel-description>
-            </mat-expansion-panel-header>
+        <mat-tab label="Informações para Contato">
 
             <form class="form-container">
                 <mat-form-field>
@@ -179,9 +187,9 @@
                 </mat-form-field>
             </form>
 
-        </mat-expansion-panel>
+        </mat-tab>
 
-    </mat-accordion>
+    </mat-tab-group>
 
 </div> 
 

@@ -19,6 +19,7 @@
     display: grid;
     grid-template-rows: auto;
     gap: 8px;
+    padding-top: 24px;
 }
 
 .input-column-2 {
@@ -49,6 +50,13 @@
     align-items: center;
     justify-content: center;
     padding-bottom: 12px;
+}
+
+.button-container {
+    width: 100%;
+    direction: rtl;
+    padding-bottom: 8px;
+
 }
 
 .mat-mdc-radio-button ~ .mat-mdc-radio-button {

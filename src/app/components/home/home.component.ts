@@ -8,6 +8,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatTabsModule} from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
 
 interface EstadoCivil {
   value: string;
@@ -25,7 +27,9 @@ interface EstadoCivil {
     MatExpansionModule,
     MatDatepickerModule,
     MatRadioModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatTabsModule
   ],
   providers: [provideNativeDateAdapter()],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -62,6 +66,8 @@ export class HomeComponent {
   //   this.enviaFormService.teste(event);
   // }
 
+  desativarCnh = true;
+
   //Botão passar form (não implementado)
   step = signal(0);
 
@@ -82,7 +88,7 @@ export class HomeComponent {
     {value: 'S', viewValue: 'Solteiro(a)'},
     {value: 'C', viewValue: 'Casado(a)'},
     {value: 'V', viewValue: 'Viúvo(a)'},
-    {value: 'O', viewValue: 'Outros'}
+    {value: 'O', viewValue: 'Outro'}
   ]
 
   // Validação de campo obrigatório
@@ -93,31 +99,71 @@ export class HomeComponent {
 
   rgVal = new FormControl('', [Validators.required, Validators.minLength(12)]);
 
-  cpfVal = new FormControl('', [Validators.required]);
+  cpfVal = new FormControl('', [Validators.required, Validators.minLength(14)]);
+
   catCnhVal = new FormControl('', [Validators.required]);
 
   // Tratamento campo RG
   formatRg(event: any) {
     let value = event.target.value.replace(/\D/g, '');
-    if (value.length > 10) value = value.substring(0, 10);
+
+    if (value.length > 9) value = value.substring(0, 9);
     
-    if (value.length >= 3) value = value.replace(/(\d{3})(\d{3})/, '$1.$2');
-    if (value.length >= 6) value = value.replace(/(\d{3})\.(\d{3})(\d{3})/, '$1.$2.$3');
-    if (value.length === 12) value = value.replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3-$4');
-  
+    if (value.length >= 5) value = value.replace(/(\d{2})(\d{3})/, '$1.$2');
+    if (value.length >= 8) value = value.replace(/(\d{2})\.(\d{3})(\d{3})/, '$1.$2.$3');
+    if (value.length === 11) value = value.replace(/(\d{2})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3-$4');
+
     event.target.value = value;
   }
 
-  getRgErrorMessage() {
-    let mensagem = ''
-    if (this.rgVal.hasError('required')) {
-      return mensagem = 'Preencha o campo antes de continuar!';
-    // } else if (this.rgVal.hasError('minlength')) {
-    //   return mensagem = 'Formato inválido. Use: 99.999.999-9';
+  // getRgErrorMessage() {
+  //   let mensagem: string;
+  //   if (this.rgVal.hasError('required')) {
+  //     mensagem = 'Preencha o campo antes de continuar!';
+  //     return mensagem;
+  //   } else if (this.rgVal.hasError('minlength')) {
+  //     mensagem = 'Formato inválido. Use: 99.999.999-9';
+  //     return mensagem;
+  //   } else {
+  //     return mensagem = ""
+  //   }
+  // }
+
+  // rgError = this.getRgErrorMessage()
+
+  // Tratamento campo CPF
+  formatCpf(event: any) {
+    let value = event.target.value.replace(/\D/g, '');
+
+    if (value.length > 11) value = value.substring(0, 11);
+    
+    if (value.length >= 6) value = value.replace(/(\d{3})(\d{3})/, '$1.$2');
+    if (value.length >= 9) value = value.replace(/(\d{3})\.(\d{3})(\d{3})/, '$1.$2.$3');
+    if (value.length === 13) value = value.replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3-$4');
+
+    event.target.value = value;
+  }
+
+  // getCpfErrorMessage() {
+  //   let mensagem = ''
+  //   if (this.rgVal.hasError('required')) {
+  //     return mensagem = 'Preencha o campo antes de continuar!';
+  //   } else if (this.rgVal.hasError('minlength')) {
+  //     return mensagem = 'Formato inválido. Use: 999.999.999-99';
+  //   } else {
+  //     return mensagem
+  //   }
+  // }
+
+  // cpfError = this.getCpfErrorMessage()
+
+  trocarTitulo(){
+    if(this.desativarCnh){
+      this.desativarCnh = false
     } else {
-      return mensagem
+      this.desativarCnh = true
     }
   }
 
-  rgError = this.getRgErrorMessage()
+  categoriasCnh: string[] = ['A', 'B', 'C', 'D', 'E']
 }
