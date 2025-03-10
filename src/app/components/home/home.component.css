@@ -1,48 +1,52 @@
 :host {
-    align-content: center;
     display: flex;
-    align-items: center;
-    padding-left: 251px;
-    padding-right: 251px;
+    justify-content: center;
+    padding: 8px;
 }
 
 .ui-container {
-    box-sizing: border-box;
     color: rgba(0, 0, 0, 0.87);
-    display: block;
-    max-width: 100%;
-    width: 1320px;
-    min-width: fit-content;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 80%;
 }
 
 .form-container {
-    display: grid;
-    grid-template-rows: auto;
-    gap: 8px;
-    padding-top: 24px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 24px 0px;
+    gap: 1rem;
 }
 
-.input-column-2 {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-gap: 12px;
+.input-max-width{
+    display: flex;
+    width: 100%;
 }
 
-.input-column-3 {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    grid-gap: 12px;
+.button-container {
+    width: 100%;
+    direction: rtl;
 }
 
+/* 
 .radio-column-2 {
     display: grid;
     grid-template-columns: 25% 75%;
 }
 
+.input-row-3 {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+}
+
 .radio-column-3 {
-    display: grid;
-    grid-template-columns: 35% 35% 25%;
-    grid-gap: 12px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .radio-container {
@@ -50,20 +54,9 @@
     align-items: center;
     justify-content: center;
     padding-bottom: 12px;
-}
-
-.button-container {
-    width: 100%;
-    direction: rtl;
-    padding-bottom: 8px;
-
+    width: fit-content;
 }
 
 .mat-mdc-radio-button ~ .mat-mdc-radio-button {
     margin-left: 16px;
-  }
-  
-/* 
-td {
-    padding-left: 12px;
   } */

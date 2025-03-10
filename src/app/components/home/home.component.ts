@@ -3,7 +3,7 @@ import { EnviaFormService } from '../../services/envia-form.service';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {FloatLabelType, MatFormFieldModule} from '@angular/material/form-field';
-import {FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {DefaultValueAccessor, FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -66,21 +66,21 @@ export class HomeComponent {
   //   this.enviaFormService.teste(event);
   // }
 
-  desativarCnh = true;
+  //Botão passar form
+  tabSelecionada = new FormControl(0);
 
-  //Botão passar form (não implementado)
-  step = signal(0);
-
-  setStep(index: number) {
-    this.step.set(index);
+  proximaTab() {
+    let valTab = this.tabSelecionada.value;
+    if (valTab != null) {
+      this.tabSelecionada.setValue(valTab+1);
+    }
   }
 
-  nextStep() {
-    this.step.update(i => i + 1);
-  }
-
-  prevStep() {
-    this.step.update(i => i - 1);
+  voltarTab() {
+    let valTab = this.tabSelecionada.value;
+    if (valTab != null) {
+      this.tabSelecionada.setValue(valTab-1);
+    }
   }
 
   // Lista para o select de estado civil
@@ -92,15 +92,11 @@ export class HomeComponent {
   ]
 
   // Validação de campo obrigatório
-  // inputRequired = new FormControl('', [Validators.required]);
   nomeVal = new FormControl('', [Validators.required]);
   dataVal = new FormControl('', [Validators.required]); 
   ecVal = new FormControl('', [Validators.required]);
-
   rgVal = new FormControl('', [Validators.required, Validators.minLength(12)]);
-
   cpfVal = new FormControl('', [Validators.required, Validators.minLength(14)]);
-
   catCnhVal = new FormControl('', [Validators.required]);
 
   // Tratamento campo RG
@@ -156,6 +152,9 @@ export class HomeComponent {
   // }
 
   // cpfError = this.getCpfErrorMessage()
+
+  // Campos CNH
+  desativarCnh = false;
 
   trocarTitulo(){
     if(this.desativarCnh){
