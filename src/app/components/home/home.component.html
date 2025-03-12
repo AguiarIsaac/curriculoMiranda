@@ -1,197 +1,234 @@
 <div class="ui-container">
     <h2>Cadastre seu Currículo</h2>
 
-    <mat-tab-group dynamicHeight [selectedIndex]="tabSelecionada.value" (selectedIndexChange)="tabSelecionada.setValue($event)">
-        <!-- Começo Dados Pessoais -->
-        <mat-tab label="Dados Pessoais">
+    <!-- <mat-tab-group [selectedIndex]="tabSelecionada.value" (selectedIndexChange)="tabSelecionada.setValue($event)"> -->
+    <p-tabs [value]="tabAtual">
 
-            <form class="form-container">
-                <mat-form-field id="nome-form" class="input-max-width">
-                    <mat-label>Nome:</mat-label>
-                    <input matInput [formControl]="nomeVal" required>
-                    @if (nomeVal.invalid && nomeVal.touched) {
-                        <mat-error>O campo é obrigatório!</mat-error>
-                    }
-                </mat-form-field>
+        <p-tablist>
+            <p-tab [value]="0">Dados Pessoais</p-tab>
+            <p-tab [value]="1">Endereço</p-tab>
+            <p-tab [value]="2">Contato</p-tab>
+        </p-tablist>
 
-                <div>
-                    <!-- Input data -->
-                    <mat-form-field id="data-form" class="input-max-width">
-                        <mat-label>Data de Nascimento:</mat-label>
-                        <input matInput [matDatepicker]="picker" [formControl]="dataVal" required>
-                        <mat-hint>MM/DD/YYYY</mat-hint>
-                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                        @if (dataVal.invalid && dataVal.touched) {
-                            <mat-error>O campo é obrigatório!</mat-error>
-                        }
-                    </mat-form-field>
-
-                    <!-- Input estado civil -->
-                    <mat-form-field id="ec-form" class="input-max-width">
-                        <mat-label>Estado Civil</mat-label>
-                        <mat-select [formControl]="ecVal" required>
-                            @for (ec of estCiv; track ec) {
-                            <mat-option [value]="ec.value">{{ec.viewValue}}</mat-option>
+        <p-tabpanels>
+            <!-- Começo Dados Pessoais -->
+            <p-tabpanel [value]="0">
+                <form class="form-container">
+                    <div class="row" id="row1">
+                        <div class="input-container">
+                            <label for="nome"> Nome: </label>
+                            <input inputId="nome" type="text" pInputText [formControl]="nomeVal" placeholder="Nome" pSize="large"/>
+                            @if (nomeVal.invalid && nomeVal.touched) {
+                                <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
                             }
-                        </mat-select>
-                        @if (ecVal.invalid && ecVal.touched) {
-                            <mat-error>O campo é obrigatório!</mat-error>
-                        }
-                    </mat-form-field>
-
-                    <!-- Input sexo -->
-                    <div id="gender-form">
-                        <label>Sexo: </label>
-                        <mat-radio-group>
-                            <mat-radio-button value="F" checked>Feminino</mat-radio-button>
-                            <mat-radio-button value="M">Masculino</mat-radio-button>
-                        </mat-radio-group>
+                        </div>
                     </div>
-                </div>
 
-            <!-- <div class="input-column-2"> -->
-                <!-- Input rg -->
-                <mat-form-field id="rg-form" class="input-max-width">
-                    <mat-label>RG:</mat-label>
-                    <input matInput [formControl]="rgVal" (input)="formatRg($event)" placeholder="Ex: 12.345.678-9" required>
-                        @if (rgVal.hasError('required') && rgVal.touched) {
-                            <mat-error>Preencha o campo antes de continuar!</mat-error>
-                        } @else if (rgVal.hasError('minlength')) {
-                            <mat-error>Formato inválido. Use: 99.999.999-9</mat-error>
-                        }
-                </mat-form-field>
+                    <div class="row" id="row2">
+                        <!-- Input data -->
+                        <div class="input-container">
+                            <label for="dataNascimento"> Data de Nascimento: </label>
+                            <p-datepicker inputId="dataNascimento" [iconDisplay]="'input'" [showIcon]="true" [formControl]="dataVal" dateFormat="dd.mm.yy" placeholder="DD/MM/YYYY" fluid size="large"/>
+                            @if (dataVal.invalid && dataVal.touched) {
+                                <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
+                            }
+                        </div>
 
-                <!-- Input cpf -->
-                <mat-form-field id="cpf-form" class="input-max-width">
-                    <mat-label>CPF:</mat-label>
-                    <input matInput [formControl]="cpfVal" (input)="formatCpf($event)" placeholder="Ex: 123.456.789-00" required>
-                        @if (cpfVal.hasError('required') && cpfVal.touched) {
-                            <mat-error>Preencha o campo antes de continuar!</mat-error>
-                        } @else if (cpfVal.hasError('minlength')) {
-                            <mat-error>Formato inválido. Use: 999.999.999-99</mat-error>
-                        }
-                </mat-form-field>
-            <!-- </div> -->
+                        <!-- Input estado civil -->
+                        <div class="input-container">
+                            <label for="estadoCivil"> Estado Civil: </label>
+                            <p-select inputId="estadoCivil" [formControl]="ecVal" [options]="estCiv" optionLabel="viewValue" placeholder="Selecione" fluid size="large"/>
+                            @if (ecVal.invalid && ecVal.touched) {
+                                <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
+                            }
+                        </div>
 
-            <!-- <div class="radio-column-2"> -->
-                <!-- Input CNH? -->
-                <div style="justify-content: flex-start">
-                    <label>Possui CNH?: </label>
-                    <mat-radio-group (change)="trocarTitulo()">
-                        <mat-radio-button value="S" checked>Sim</mat-radio-button>
-                        <mat-radio-button value="N">Não</mat-radio-button>
-                    </mat-radio-group>
-                </div>
+                        <!-- Input sexo -->
+                        <div class="radio-button-group">
+                            <label> Sexo: </label>
+                            <div class="radio-button-container">
+                                <div class="radio-button-container">
+                                    <p-radiobutton inputId="sx1"  name="sexo" value="F" [(ngModel)]="gender"/>
+                                    <label for="sx1" class="ml-2">Feminino</label>
+                                </div>
+                                <div class="radio-button-container">
+                                    <p-radiobutton inputId="sx2" name="sexo" value="M" [(ngModel)]="gender"/>
+                                    <label for="sx2" class="ml-2">Masculino</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                <!-- Input categoria CNH -->
-                <mat-form-field id="catCnh-form" class="input-max-width">
-                    <mat-label>Categoria CNH:</mat-label>
-                    <mat-select [disabled]="desativarCnh" [formControl]="catCnhVal" multiple >
-                        @for (cat of categoriasCnh; track cat) {
-                            <mat-option [value]="cat">{{cat}}</mat-option>
-                        }
-                    </mat-select>
-                </mat-form-field>
-            <!-- </div> -->
-            </form>
+                    <div class="row" id="row3">
+                        <!-- Input rg -->
+                        <div class="input-container">
+                            <label for="rg"> RG: </label>
+                            <p-inputmask #rg inputId="rg" [formControl]="rgVal" mask="99.999.999-9" placeholder="99.999.999-9" size="large" autoClear="false"/>
+                            @if (rgVal.hasError('required') && rgVal.touched) {
+                                <p-message severity="error" variant="simple" size="small">Preencha o campo antes de continuar!</p-message>
+                            } @else if (rgVal.hasError('pattern') && !rg.focused) {
+                                <p-message severity="error" variant="simple" size="small">Formato inválido. Use: 99.999.999-9</p-message>
+                            }
+                        </div>
 
-        </mat-tab>
+                        <!-- Input cpf -->
+                        <div class="input-container">
+                            <label for="cpf"> CPF: </label>
+                            <p-inputmask #cpf inputId="cpf" [formControl]="cpfVal" mask="999.999.999-99" placeholder="999.999.999-99" size="large" autoClear="false" />
+                            @if (cpfVal.hasError('required') && cpfVal.touched) {
+                                <p-message severity="error" variant="simple" size="small">Preencha o campo antes de continuar!</p-message>
+                            } @else if (cpfVal.hasError('pattern') && !cpf.focused) {
+                                <p-message severity="error" variant="simple" size="small">Formato inválido. Use: 999.999.999-99</p-message>
+                            }
+                        </div>
 
-        <!-- Começo Endereço -->
-        <mat-tab label="Endereço">
+                        <!-- Input CNH? -->
+                        <div class="radio-button-group2">
+                            <label> Possui CNH?: </label>
+                            @for (op of opCnh; track op) {
+                                <div class="radio-button-container">
+                                    <p-radiobutton [inputId]="op.id"  name="pcnh" [value]="op.value" [(ngModel)]="pcnh" (onClick)="alterarCatCnh()"/>
+                                    <label [for]="op.id">{{ op.viewValue }}</label>
+                                </div>
+                            }
+                        </div>
+        
+                        <!-- Input categoria CNH -->
+                        <div class="input-container">
+                            <label for="catCnh"> Categoria CNH: </label>
+                            <p-multiselect inputId="catCnh" [disabled]="desativarCnh" [formControl]="catCnhVal" [(ngModel)]="valueCatCnh" [options]="categoriasCnh" placeholder="Selecione" fluid size="large"/>
+                            @if (catCnhVal.invalid && catCnhVal.touched) {
+                                <p-message severity="error" variant="simple" size="small">Selecione uma das opções!</p-message>
+                            }
+                        </div>
 
-            <form class="form-container">
-                <mat-form-field>
-                    <mat-label>Nome:</mat-label>
-                    <input matInput>
-                </mat-form-field>
+                    </div>
+                </form>
 
-                <mat-form-field>
-                    <mat-label>Nome:</mat-label>
-                    <input matInput>
-                </mat-form-field>
+            </p-tabpanel>
 
-                <mat-form-field>
-                    <mat-label>Nome:</mat-label>
-                    <input matInput>
-                </mat-form-field>
+            <!-- Começo Endereço -->
+            <p-tabpanel [value]="1">
 
-                <mat-form-field>
-                    <mat-label>Nome:</mat-label>
-                    <input matInput>
-                </mat-form-field>
+                <form class="form-container">
+                    <div class="row">
+                        <div class="input-container">
+                            <label> Nome: </label>
+                            <input type="text" pInputText placeholder="Nome" pSize="large"/>
+                        </div>
+                    </div>    
 
-                <mat-form-field>
-                    <mat-label>Nome:</mat-label>
-                    <input matInput>
-                </mat-form-field>
+                    <div class="row">
+                        <div class="input-container">
+                            <label> Nome: </label>
+                            <input type="text" pInputText placeholder="Nome" pSize="large"/>
+                        </div>
 
-                <mat-form-field>
-                    <mat-label>Nome:</mat-label>
-                    <input matInput>
-                </mat-form-field>
-            </form>
+                        <div class="input-container">
+                            <label> Nome: </label>
+                            <input type="text" pInputText placeholder="Nome" pSize="large"/>
+                        </div>
+                    </div>
 
-        </mat-tab>
+                    <div class="row">
+                        <div class="input-container">
+                            <label> Nome: </label>
+                            <input type="text" pInputText placeholder="Nome" pSize="large"/>
+                        </div>
 
-        <!-- Começo Contato -->
-        <mat-tab label="Informações para Contato">
+                        <div class="input-container">
+                            <label> Nome: </label>
+                            <input type="text" pInputText placeholder="Nome" pSize="large"/>
+                        </div>
+                    </div>
 
-            <form class="form-container">
-                <mat-form-field>
-                    <mat-label>Nome:</mat-label>
-                    <input matInput>
-                </mat-form-field>
+                    <div class="row">
+                        <div class="input-container">
+                            <label> Nome: </label>
+                            <input type="text" pInputText placeholder="Nome" pSize="large"/>
+                        </div>
 
-                <mat-form-field>
-                    <mat-label>Nome:</mat-label>
-                    <input matInput>
-                </mat-form-field>
+                        <div class="input-container">
+                            <label> Nome: </label>
+                            <input type="text" pInputText placeholder="Nome" pSize="large"/>
+                        </div>
+                    </div>
+                </form>
 
-                <mat-form-field>
-                    <mat-label>Nome:</mat-label>
-                    <input matInput>
-                </mat-form-field>
+            </p-tabpanel>
 
-                <mat-form-field>
-                    <mat-label>Nome:</mat-label>
-                    <input matInput>
-                </mat-form-field>
+            <!-- Começo Contato -->
+            <p-tabpanel [value]="2">
 
-                <mat-form-field>
-                    <mat-label>Nome:</mat-label>
-                    <input matInput>
-                </mat-form-field>
+                <form class="form-container">
+                    <div class="row">
+                        <div class="input-container">
+                            <label> Nome: </label>
+                            <input type="text" pInputText placeholder="Nome" pSize="large"/>
+                        </div>
+                    </div>    
 
-                <mat-form-field>
-                    <mat-label>Nome:</mat-label>
-                    <input matInput>
-                </mat-form-field>
-            </form>
+                    <div class="row">
+                        <div class="input-container">
+                            <label> Nome: </label>
+                            <input type="text" pInputText placeholder="Nome" pSize="large"/>
+                        </div>
 
-        </mat-tab>
+                        <div class="input-container">
+                            <label> Nome: </label>
+                            <input type="text" pInputText placeholder="Nome" pSize="large"/>
+                        </div>
+                    </div>
 
-    </mat-tab-group>
+                    <div class="row">
+                        <div class="input-container">
+                            <label> Nome: </label>
+                            <input type="text" pInputText placeholder="Nome" pSize="large"/>
+                        </div>
+
+                        <div class="input-container">
+                            <label> Nome: </label>
+                            <input type="text" pInputText placeholder="Nome" pSize="large"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-container">
+                            <label> Nome: </label>
+                            <input type="text" pInputText placeholder="Nome" pSize="large"/>
+                        </div>
+
+                        <div class="input-container">
+                            <label> Nome: </label>
+                            <input type="text" pInputText placeholder="Nome" pSize="large"/>
+                        </div>
+                    </div>
+                </form>
+
+            </p-tabpanel>
+
+        </p-tabpanels>
+    </p-tabs>
 
     <div class="button-container">
-        <button mat-raised-button
-                style="margin-right: 12px;"
+        <p-button
+                [raised]="tabAtual != 2"
                 ngDefaultControl
-                [formControl]="tabSelecionada"
                 (click)="proximaTab()"
-                [disabled]="tabSelecionada.value === 2">
+                [disabled]="tabAtual === 2"
+                size="large"
+                severity="secondary">
             Próximo
-        </button>
+        </p-button>
 
-        <button mat-raised-button
-                style="margin-right: 12px;"
+        <p-button
+                [raised]="tabAtual != 0"
                 ngDefaultControl
-                [formControl]="tabSelecionada"
                 (click)="voltarTab()"
-                [disabled]="tabSelecionada.value === 0">
+                [disabled]="tabAtual === 0"
+                size="large">
             Anterior
-        </button>
+        </p-button>
     </div>
 
 </div> 
