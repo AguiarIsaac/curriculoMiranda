@@ -3,7 +3,7 @@ import { EnviaFormService } from '../../services/envia-form.service';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {FloatLabelType, MatFormFieldModule} from '@angular/material/form-field';
-import {DefaultValueAccessor, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {DefaultValueAccessor, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -19,7 +19,7 @@ import { SelectModule } from 'primeng/select';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputMaskModule } from 'primeng/inputmask';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { TabsModule } from 'primeng/tabs';
+import { Tab, TabsModule } from 'primeng/tabs';
 import { ButtonModule } from 'primeng/button';
 
 interface EstadoCivil {
@@ -59,25 +59,55 @@ interface EstadoCivil {
   styleUrl: './home.component.css'
 })
 export class HomeComponent{
+  formDadosPessoais: FormGroup;
 
-  // Validação de campo obrigatório
-  nomeVal = new FormControl('', [Validators.required]);
-  dataVal = new FormControl('', [Validators.required]); 
-  ecVal = new FormControl(Date, [Validators.required]);
-  rgVal = new FormControl('', [Validators.required, Validators.pattern('\\d{2}\\.\\d{3}\\.\\d{3}-\\d')]);
-  cpfVal = new FormControl('', [Validators.required, Validators.pattern('\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}')]);
-  catCnhVal = new FormControl('', [Validators.required]);
+  constructor (private fb: FormBuilder) {
+    this.formDadosPessoais = this.fb.group({
+      nomeVal: ['', Validators.required],
+      dataVal: ['', Validators.required],
+      ecVal: ['', Validators.required],
+      sxVal: ['F', Validators.required],
+      rgVal: ['', [Validators.required, Validators.pattern('\\d{2}\\.\\d{3}\\.\\d{3}-\\d')]],
+      cpfVal: ['', [Validators.required, Validators.pattern('\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}')]],
+      pCnhVal: ['S', Validators.required],
+      catCnhVal: [{value: [], disabled: false}, Validators.required]
+    })
+  }
 
-  gender!: string;
-  pcnh!: string;
+  get dPCntrl() {
+    return this.formDadosPessoais.controls;
+  }
+
+  get formDadosPessoaisValido(): boolean {
+    return this.formDadosPessoais.valid;
+  }
+
+  enviarFormulario() {
+    if (this.formDadosPessoais.valid) {
+      this.proximaTab()
+      console.log('Formulário enviado com sucesso!', this.formDadosPessoais.value);
+    } else {
+      console.log('Preencha todos os campos corretamente.');
+    }
+  }
+
+  // Listas opções radio buttons
+  opSx = [
+    { viewValue: 'Feminino', value: 'F', id: 'sx1', divId: 'div-pad' },
+    { viewValue: 'Masculino', value: 'M', id: 'sx2' }
+  ]
 
   opCnh = [
-    { viewValue: 'Sim', value: 'S', id: 'pcnh1' },
-    { viewValue: 'Não', value: 'N', id: 'pcnh2'}
+    { viewValue: 'Sim', value: 'S', id: 'pcnh1', divId: 'div-pad' },
+    { viewValue: 'Não', value: 'N', id: 'pcnh2' }
   ];
 
   //Botão passar tab
   tabAtual: number = 0;
+
+  setTab(index: any) {
+    this.tabAtual = index;
+  }
 
   proximaTab() {
     if (this.tabAtual >= 0 && this.tabAtual <= 1) {
@@ -98,6 +128,24 @@ export class HomeComponent{
     {value: 'V', viewValue: 'Viúvo(a)'},
     {value: 'O', viewValue: 'Outro'}
   ]
+
+  // Campos CNH
+  desativarCnh = true;
+
+  alterarCatCnh(){
+    if(this.dPCntrl['pCnhVal'].value === 'S'){
+      this.desativarCnh = false
+      this.dPCntrl['catCnhVal'].enable()
+    } else {
+      this.desativarCnh = true
+      this.dPCntrl['catCnhVal'].disable()
+      this.dPCntrl['catCnhVal'].setValue(undefined)
+    }
+  }
+
+  categoriasCnh: string[] = ['A', 'B', 'C', 'D', 'E']
+
+
 
   // Tratamento campo RG
   // formatRg(event: any) {
@@ -124,21 +172,4 @@ export class HomeComponent{
 
   //   event.target.value = value;
   // }
-
-  // Campos CNH
-  desativarCnh = true;
-
-  alterarCatCnh(){
-    if(this.pcnh === 'S'){
-      this.desativarCnh = false
-      this.catCnhVal.enable()
-    } else {
-      this.desativarCnh = true
-      this.catCnhVal.disable()
-      this.valueCatCnh = []
-    }
-  }
-
-  valueCatCnh: string[] | undefined;
-  categoriasCnh: string[] = ['A', 'B', 'C', 'D', 'E']
 }

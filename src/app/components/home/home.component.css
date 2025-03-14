@@ -8,7 +8,6 @@
     color: rgba(0, 0, 0, 0.87);
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     gap: 1rem;
 }
 
@@ -26,7 +25,6 @@
     gap: 1rem;
 }
 
-<<<<<<< HEAD
 .input-container {
     display: flex;
     flex-direction: column;
@@ -40,21 +38,12 @@
     gap: 1.2rem;
 }
 
-.radio-button-group2 {
-    display: flex;
-    gap: 1.2rem;
-    align-items: center;
-    white-space: nowrap;
-}
-
 .radio-button-container{
     display: flex;
     gap: 0.5rem;
     align-items: center;
 }
 
-=======
->>>>>>> eb28e5b526d74feb1e2d103d168bd505b09ec93d
 .button-container {
     display: flex;
     direction: rtl;
@@ -62,48 +51,9 @@
     gap: 1rem;
 }
 
-.row {
-    display: flex;
-    width: 100%;
-    gap: 1rem;
-    height: 4rem;
+#div-pad {
+    padding-right: 1.5rem;
 }
-
-.column {
-    /* display: flex;
-    width: 100%; */
-}
-
-/* 
-.radio-column-2 {
-    display: grid;
-    grid-template-columns: 25% 75%;
-}
-
-.input-row-3 {
-    display: flex;
-    gap: 0.5rem;
-    width: 100%;
-}
-
-.radio-column-3 {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.radio-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-bottom: 12px;
-    width: fit-content;
-}
-
-.mat-mdc-radio-button ~ .mat-mdc-radio-button {
-    margin-left: 16px;
-  } */
 
 @media (max-width: 1000px) {
     .row{
