@@ -26,6 +26,7 @@
     gap: 1rem;
 }
 
+<<<<<<< HEAD
 .input-container {
     display: flex;
     flex-direction: column;
@@ -52,11 +53,25 @@
     align-items: center;
 }
 
+=======
+>>>>>>> eb28e5b526d74feb1e2d103d168bd505b09ec93d
 .button-container {
     display: flex;
     direction: rtl;
     padding-right: 0.5rem;
     gap: 1rem;
+}
+
+.row {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    height: 4rem;
+}
+
+.column {
+    /* display: flex;
+    width: 100%; */
 }
 
 /* 

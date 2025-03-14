@@ -1,6 +1,7 @@
 <div class="ui-container">
-    <h2>Cadastre seu Currículo</h2>
+  <h2>Cadastre seu Currículo</h2>
 
+<<<<<<< HEAD
     <!-- <mat-tab-group [selectedIndex]="tabSelecionada.value" (selectedIndexChange)="tabSelecionada.setValue($event)"> -->
     <p-tabs [value]="tabAtual">
 
@@ -232,7 +233,230 @@
     </div>
 
 </div> 
+=======
+  <mat-tab-group
+    dynamicHeight
+    [selectedIndex]="tabSelecionada.value"
+    (selectedIndexChange)="tabSelecionada.setValue($event)"
+  >
+    <!-- Começo Dados Pessoais -->
+    <mat-tab label="Dados Pessoais">
+      <form class="form-container">
+        <div class="row">
+          <mat-form-field id="nome-form" class="column" style="width: 60%">
+            <mat-label>Nome:</mat-label>
+            <input matInput [formControl]="nomeVal" required />
+            @if (nomeVal.invalid && nomeVal.touched) {
+            <mat-error>O campo é obrigatório!</mat-error>
+            }
+          </mat-form-field>
+          <!-- Input data -->
+          <mat-form-field id="data-form" class="column">
+            <mat-label>Data de Nascimento:</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              [formControl]="dataVal"
+              required
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            @if (dataVal.invalid && dataVal.touched) {
+            <mat-error>O campo é obrigatório!</mat-error>
+            }
+          </mat-form-field>
 
+          <!-- Input estado civil -->
+          <mat-form-field id="ec-form" class="column">
+            <mat-label>Estado Civil</mat-label>
+            <mat-select [formControl]="ecVal" required>
+              @for (ec of estCiv; track ec) {
+              <mat-option [value]="ec.value">{{ ec.viewValue }}</mat-option>
+              }
+            </mat-select>
+            @if (ecVal.invalid && ecVal.touched) {
+            <mat-error>O campo é obrigatório!</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <!-- Input sexo -->
+          <div id="gender-form">
+            <label>Sexo: </label>
+            <mat-radio-group>
+              <mat-radio-button value="F" checked>Feminino</mat-radio-button>
+              <mat-radio-button value="M">Masculino</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <!-- <div class="input-column-2"> -->
+          <!-- Input rg -->
+          <mat-form-field id="rg-form" class="column" style="width: 25%">
+            <mat-label>RG:</mat-label>
+            <input
+              matInput
+              [formControl]="rgVal"
+              (input)="formatRg($event)"
+              placeholder="Ex: 12.345.678-9"
+              required
+            />
+            @if (rgVal.hasError('required') && rgVal.touched) {
+            <mat-error>Preencha o campo antes de continuar!</mat-error>
+            } @else if (rgVal.hasError('minlength')) {
+            <mat-error>Formato inválido. Use: 99.999.999-9</mat-error>
+            }
+          </mat-form-field>
+          <!-- Input cpf -->
+          <mat-form-field id="cpf-form" class="column" style="width: 25%">
+            <mat-label>CPF:</mat-label>
+            <input
+              matInput
+              [formControl]="cpfVal"
+              (input)="formatCpf($event)"
+              placeholder="Ex: 123.456.789-00"
+              required
+            />
+            @if (cpfVal.hasError('required') && cpfVal.touched) {
+            <mat-error>Preencha o campo antes de continuar!</mat-error>
+            } @else if (cpfVal.hasError('minlength')) {
+            <mat-error>Formato inválido. Use: 999.999.999-99</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <!-- </div> -->
+
+          <!-- <div class="radio-column-2"> -->
+          <!-- Input CNH? -->
+          <div style="justify-content: flex-start">
+            <label>Possui CNH?: </label>
+            <mat-radio-group (change)="trocarTitulo()">
+              <mat-radio-button value="S" checked>Sim</mat-radio-button>
+              <mat-radio-button value="N">Não</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <!-- Input categoria CNH -->
+          <mat-form-field id="catCnh-form" class="column" style="width: 25%">
+            <mat-label>Categoria CNH:</mat-label>
+            <mat-select
+              [disabled]="desativarCnh"
+              [formControl]="catCnhVal"
+              multiple
+            >
+              @for (cat of categoriasCnh; track cat) {
+              <mat-option [value]="cat">{{ cat }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- </div> -->
+      </form>
+    </mat-tab>
+
+    <!-- Começo Endereço -->
+    <mat-tab label="Endereço">
+      <form class="form-container">
+        <mat-form-field>
+          <mat-label>Nome:</mat-label>
+          <input matInput />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Nome:</mat-label>
+          <input matInput />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Nome:</mat-label>
+          <input matInput />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Nome:</mat-label>
+          <input matInput />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Nome:</mat-label>
+          <input matInput />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Nome:</mat-label>
+          <input matInput />
+        </mat-form-field>
+      </form>
+    </mat-tab>
+
+    <!-- Começo Contato -->
+    <mat-tab label="Informações para Contato">
+      <form class="form-container">
+        <mat-form-field>
+          <mat-label>Nome:</mat-label>
+          <input matInput />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Nome:</mat-label>
+          <input matInput />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Nome:</mat-label>
+          <input matInput />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Nome:</mat-label>
+          <input matInput />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Nome:</mat-label>
+          <input matInput />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Nome:</mat-label>
+          <input matInput />
+        </mat-form-field>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+
+  <div class="button-container">
+    <button
+      mat-raised-button
+      style="margin-right: 12px"
+      ngDefaultControl
+      [formControl]="tabSelecionada"
+      (click)="proximaTab()"
+      [disabled]="tabSelecionada.value === 2"
+    >
+      Próximo
+    </button>
+>>>>>>> eb28e5b526d74feb1e2d103d168bd505b09ec93d
+
+    <button
+      mat-raised-button
+      style="margin-right: 12px"
+      ngDefaultControl
+      [formControl]="tabSelecionada"
+      (click)="voltarTab()"
+      [disabled]="tabSelecionada.value === 0"
+    >
+      Anterior
+    </button>
+  </div>
+</div>
 
 <!-- @if(deveMostrarTitulo){
     <h1>Titulo AAAA</h1>
