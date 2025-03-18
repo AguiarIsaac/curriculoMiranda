@@ -9,7 +9,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    --border-radius-ajuste: 6px 0px 0px 6px; 
 }
 
 .p-inputmask {
@@ -18,4 +17,42 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
 
 .p-tabs {
     --p-tabs-tabpanel-padding: 0px;
+}
+
+.ui-container {
+    color: rgba(0, 0, 0, 0.87);
+    width: 100%;
+    padding: 2rem 6rem;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 24px 0px;
+    gap: 1.5rem;
+}
+
+.row{
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+@media (max-width: 1000px) {
+    .ui-container{
+        width: auto;
+        padding: 2rem 2rem;
+    }
+
+    .row{
+        flex-wrap: wrap;
+    }
 }

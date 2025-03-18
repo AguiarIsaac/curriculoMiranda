@@ -1,5 +1,94 @@
 <router-outlet />
 
 <div class="ui-container">
-    <app-home/>
+
+    <div style="padding-bottom: 2rem;">
+        <h2>Cadastre seu Currículo</h2>
+    </div>
+
+    <p-tabs #tabs [value]="tabAtual" (valueChange)="setTab(tabs.value())" scrollable="true">
+
+        <p-tablist>
+            <p-tab [value]="0">Dados Pessoais</p-tab>
+            <p-tab [value]="1">Endereço</p-tab>
+            <p-tab [value]="2">Contato</p-tab>
+            <p-tab [value]="3">Área de Interesse</p-tab>
+            <p-tab [value]="4">Informações Adicionais</p-tab>
+            <p-tab [value]="5">Formação</p-tab>
+            <p-tab [value]="6">Experiência Profissional</p-tab>
+        </p-tablist>
+
+        <p-tabpanels>
+
+            <!-- Form Dados Pessoais -->
+            <p-tabpanel [value]="0" id="dadosPessoaisTab">
+                <app-dados-pessoais-form/>
+            </p-tabpanel>
+
+            <!-- Form Endereço -->
+            <p-tabpanel [value]="1" id="enderecoTab">
+                <app-endereco-form/>
+            </p-tabpanel>
+
+            <!-- Form Contato -->
+            <p-tabpanel [value]="2" id="contatoTab">
+                <app-contato-form/>
+            </p-tabpanel>
+
+            <!-- Form Área de Interesse -->
+            <p-tabpanel [value]="3" id="areaDeInterresseTab">
+                
+            </p-tabpanel>
+
+            <!-- Form Informações Adicionais -->
+            <p-tabpanel [value]="4" id="informacoesAdicionaisTab">
+
+            </p-tabpanel>
+
+            <!-- Form Formação -->
+            <p-tabpanel [value]="5" id="formacaoTab">
+
+            </p-tabpanel>
+
+            <!-- Form Experiência Profissional -->
+            <p-tabpanel [value]="6" id="experienciaProfissionalTab">
+
+            </p-tabpanel>
+
+        </p-tabpanels>
+
+    </p-tabs>
+
+    <!-- <div class="button-container">
+        @if (tabAtual === 2) {
+            <p-button
+                    severity="success"
+                    (onClick)="enviarFormulario()"
+                    [raised]="ativarBotao()"
+                    ngDefaultControl
+                    [disabled]="!ativarBotao()"
+                    size="large">
+                Enviar
+            </p-button>
+        } @else {
+            <p-button
+                    (onClick)="enviarFormulario()"
+                    [raised]="ativarBotao()"
+                    ngDefaultControl
+                    [disabled]="!ativarBotao()"
+                    size="large">
+                Próximo
+            </p-button>
+        }
+
+
+        <p-button
+                [raised]="tabAtual != 0"
+                ngDefaultControl
+                (click)="voltarTab()"
+                [disabled]="tabAtual === 0"
+                size="large">
+            Anterior
+        </p-button> -->
+
 </div>

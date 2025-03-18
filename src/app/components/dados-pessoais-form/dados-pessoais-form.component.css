@@ -1,0 +1,15 @@
+#div-pad {
+    padding-right: 1.5rem;
+}
+
+.radio-button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.radio-button-container{
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}

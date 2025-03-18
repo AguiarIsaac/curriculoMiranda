@@ -1,12 +1,6 @@
-.ui-container {
-    color: rgba(0, 0, 0, 0.87);
-    width: 100%;
-    padding: 2rem 6rem;
-}
-
-@media (max-width: 1000px) {
-    .ui-container{
-        width: auto;
-        padding: 2rem 2rem;
-    }
+.button-container {
+    display: flex;
+    direction: rtl;
+    padding-right: 0.5rem;
+    gap: 1rem;
 }
