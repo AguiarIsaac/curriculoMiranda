@@ -1,26 +1,18 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, OnInit, Output, signal } from '@angular/core';
-import { EnviaFormService } from '../../services/envia-form.service';
-import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
-import {FloatLabelType, MatFormFieldModule} from '@angular/material/form-field';
-import {DefaultValueAccessor, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatTabsModule} from '@angular/material/tabs';
-import { MatButtonModule } from '@angular/material/button';
-
 import { InputTextModule } from 'primeng/inputtext';
 import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { MessageModule } from 'primeng/message';
 import { DatePickerModule } from 'primeng/datepicker';
 import { SelectModule } from 'primeng/select';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputMaskModule } from 'primeng/inputmask';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { Tab, TabsModule } from 'primeng/tabs';
+import { TabsModule } from 'primeng/tabs';
 import { ButtonModule } from 'primeng/button';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 interface EstadoCivil {
   value: string;
@@ -31,19 +23,12 @@ interface EstadoCivil {
   selector: 'app-home',
   standalone: true,
   imports: [
-    MatFormFieldModule, 
-    MatInputModule, 
-    MatSelectModule, 
     FormsModule, 
-    MatExpansionModule,
-    MatDatepickerModule,
-    MatRadioModule,
     ReactiveFormsModule,
-    MatButtonModule,
-    MatTabsModule,
 
     InputTextModule,
     InputGroupModule,
+    InputGroupAddonModule,
     MessageModule,
     DatePickerModule,
     SelectModule,
@@ -51,7 +36,8 @@ interface EstadoCivil {
     InputMaskModule,
     MultiSelectModule,
     TabsModule,
-    ButtonModule
+    ButtonModule,
+    InputNumberModule
   ],
   providers: [provideNativeDateAdapter()],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -60,6 +46,8 @@ interface EstadoCivil {
 })
 export class HomeComponent{
   formDadosPessoais: FormGroup;
+  formEndereco: FormGroup;
+  formContato: FormGroup;
 
   constructor (private fb: FormBuilder) {
     this.formDadosPessoais = this.fb.group({
@@ -72,35 +60,52 @@ export class HomeComponent{
       pCnhVal: ['S', Validators.required],
       catCnhVal: [{value: [], disabled: false}, Validators.required]
     })
+
+    this.formEndereco = this.fb.group({
+      endVal: ['', Validators.required],
+      bairroVal: ['', Validators.required],
+      numVal: [undefined, Validators.required],
+      compVal: [undefined],
+      estadoVal: ['', Validators.required],
+      cidVal: ['', Validators.required],
+      cepVal: ['', [Validators.required, Validators.pattern('\\d{5}\\-\\d{3}')]],
+    })
+
+    this.formContato = this.fb.group({
+      telResVal: [''],
+      celVal: ['', Validators.required],
+      emailVal: ['', [Validators.required, Validators.email]],
+      lkdInVal: [''],
+      facebookVal: [''],
+      instagramVal: ['']
+    })
   }
 
   get dPCntrl() {
     return this.formDadosPessoais.controls;
   }
 
-  get formDadosPessoaisValido(): boolean {
-    return this.formDadosPessoais.valid;
+  get endCntrl() {
+    return this.formEndereco.controls;
+  }
+
+  get contCntrl() {
+    return this.formContato.controls;
   }
 
   enviarFormulario() {
-    if (this.formDadosPessoais.valid) {
+    if (this.formDadosPessoais.valid && this.tabAtual === 0) {
       this.proximaTab()
       console.log('Formulário enviado com sucesso!', this.formDadosPessoais.value);
+    } else if (this.formEndereco.valid && this.tabAtual === 1) {
+      this.proximaTab()
+      console.log('Formulário enviado com sucesso!', this.formEndereco.value);
+    } else if (this.formContato.valid && this.tabAtual === 2) {
+      console.log('Formulário enviado com sucesso!', this.formContato.value);
     } else {
       console.log('Preencha todos os campos corretamente.');
     }
   }
-
-  // Listas opções radio buttons
-  opSx = [
-    { viewValue: 'Feminino', value: 'F', id: 'sx1', divId: 'div-pad' },
-    { viewValue: 'Masculino', value: 'M', id: 'sx2' }
-  ]
-
-  opCnh = [
-    { viewValue: 'Sim', value: 'S', id: 'pcnh1', divId: 'div-pad' },
-    { viewValue: 'Não', value: 'N', id: 'pcnh2' }
-  ];
 
   //Botão passar tab
   tabAtual: number = 0;
@@ -121,6 +126,18 @@ export class HomeComponent{
     }
   }
 
+  ativarBotao () {
+    if (this.tabAtual === 0 && this.formDadosPessoais.valid) {
+      return true
+    } else if (this.tabAtual === 1 && this.formEndereco.valid) {
+      return true
+    } else if (this.tabAtual === 2 && this.formContato.valid) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   // Lista para o select de estado civil
   estCiv: EstadoCivil[] = [
     {value: 'S', viewValue: 'Solteiro(a)'},
@@ -128,6 +145,17 @@ export class HomeComponent{
     {value: 'V', viewValue: 'Viúvo(a)'},
     {value: 'O', viewValue: 'Outro'}
   ]
+
+  // Listas opções radio buttons
+  opSx = [
+    { viewValue: 'Feminino', value: 'F', id: 'sx1', divId: 'div-pad' },
+    { viewValue: 'Masculino', value: 'M', id: 'sx2' }
+  ]
+
+  opCnh = [
+    { viewValue: 'Sim', value: 'S', id: 'pcnh1', divId: 'div-pad' },
+    { viewValue: 'Não', value: 'N', id: 'pcnh2' }
+  ];
 
   // Campos CNH
   desativarCnh = true;
@@ -145,31 +173,35 @@ export class HomeComponent{
 
   categoriasCnh: string[] = ['A', 'B', 'C', 'D', 'E']
 
-
-
-  // Tratamento campo RG
-  // formatRg(event: any) {
-  //   let value = event.target.value.replace(/\D/g, '');
-
-  //   if (value.length > 9) value = value.substring(0, 9);
-    
-  //   if (value.length >= 5) value = value.replace(/(\d{2})(\d{3})/, '$1.$2');
-  //   if (value.length >= 8) value = value.replace(/(\d{2})\.(\d{3})(\d{3})/, '$1.$2.$3');
-  //   if (value.length === 11) value = value.replace(/(\d{2})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3-$4');
-
-  //   event.target.value = value;
-  // }
-
-  // Tratamento campo CPF
-  // formatCpf(event: any) {
-  //   let value = event.target.value.replace(/\D/g, '');
-
-  //   if (value.length > 11) value = value.substring(0, 11);
-    
-  //   if (value.length >= 6) value = value.replace(/(\d{3})(\d{3})/, '$1.$2');
-  //   if (value.length >= 9) value = value.replace(/(\d{3})\.(\d{3})(\d{3})/, '$1.$2.$3');
-  //   if (value.length === 13) value = value.replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3-$4');
-
-  //   event.target.value = value;
-  // }
+  // Lista para o select de Estado
+  estado: string[] = [
+    "Acre",
+    "Alagoas",
+    "Amapá",
+    "Amazonas",
+    "Bahia",
+    "Ceará",
+    "Distrito Federal",
+    "Espírito Santo",
+    "Goiás",
+    "Maranhão",
+    "Mato Grosso",
+    "Mato Grosso do Sul",
+    "Minas Gerais",
+    "Pará",
+    "Paraíba",
+    "Paraná",
+    "Pernambuco",
+    "Piauí",
+    "Rio de Janeiro",
+    "Rio Grande do Norte",
+    "Rio Grande do Sul",
+    "Rondônia",
+    "Roraima",
+    "Santa Catarina",
+    "São Paulo",
+    "Sergipe",
+    "Tocantins"
+  ]
+  
 }
