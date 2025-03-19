@@ -6,7 +6,7 @@
         <h2>Cadastre seu Currículo</h2>
     </div>
 
-    <p-tabs #tabs [value]="tabAtual" (valueChange)="setTab(tabs.value())" scrollable="true">
+    <p-tabs #tabs [value]="tabAtualMain" (valueChange)="setTab(tabs.value())" scrollable="true">
 
         <p-tablist>
             <p-tab [value]="0">Dados Pessoais</p-tab>
@@ -22,7 +22,7 @@
 
             <!-- Form Dados Pessoais -->
             <p-tabpanel [value]="0" id="dadosPessoaisTab">
-                <app-dados-pessoais-form/>
+                <app-dados-pessoais-form />
             </p-tabpanel>
 
             <!-- Form Endereço -->
@@ -37,58 +37,28 @@
 
             <!-- Form Área de Interesse -->
             <p-tabpanel [value]="3" id="areaDeInterresseTab">
-                
+                <p>placeholder</p>
             </p-tabpanel>
 
             <!-- Form Informações Adicionais -->
             <p-tabpanel [value]="4" id="informacoesAdicionaisTab">
-
+                <p>placeholder</p>
             </p-tabpanel>
 
             <!-- Form Formação -->
             <p-tabpanel [value]="5" id="formacaoTab">
-
+                <p>placeholder</p>
             </p-tabpanel>
 
             <!-- Form Experiência Profissional -->
             <p-tabpanel [value]="6" id="experienciaProfissionalTab">
-
+                <p>placeholder</p>
             </p-tabpanel>
 
         </p-tabpanels>
 
     </p-tabs>
 
-    <!-- <div class="button-container">
-        @if (tabAtual === 2) {
-            <p-button
-                    severity="success"
-                    (onClick)="enviarFormulario()"
-                    [raised]="ativarBotao()"
-                    ngDefaultControl
-                    [disabled]="!ativarBotao()"
-                    size="large">
-                Enviar
-            </p-button>
-        } @else {
-            <p-button
-                    (onClick)="enviarFormulario()"
-                    [raised]="ativarBotao()"
-                    ngDefaultControl
-                    [disabled]="!ativarBotao()"
-                    size="large">
-                Próximo
-            </p-button>
-        }
-
-
-        <p-button
-                [raised]="tabAtual != 0"
-                ngDefaultControl
-                (click)="voltarTab()"
-                [disabled]="tabAtual === 0"
-                size="large">
-            Anterior
-        </p-button> -->
+    <app-botoes [tabAtual]='tabAtualMain' (tabEvent)="setTab($event)"/>
 
 </div>

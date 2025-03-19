@@ -1,0 +1,6 @@
+.button-container {
+    display: flex;
+    direction: rtl;
+    padding-right: 0.5rem;
+    gap: 1rem;
+}

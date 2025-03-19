@@ -1,0 +1,31 @@
+<div class="button-container">
+    @if (tabAtual === 6) {
+        <p-button
+                severity="success"
+                (onClick)="enviarFormulario()"
+                [raised]="ativarBotao()"
+                ngDefaultControl
+                [disabled]="!ativarBotao()"
+                size="large">
+            Enviar
+        </p-button>
+    } @else {
+        <p-button
+                (onClick)="enviarFormulario()"
+                [raised]="ativarBotao()"
+                ngDefaultControl
+                [disabled]="!ativarBotao()"
+                size="large">
+            Próximo
+        </p-button>
+    }
+
+
+    <p-button
+            [raised]="tabAtual != 0"
+            ngDefaultControl
+            (click)="voltarTab()"
+            [disabled]="tabAtual === 0"
+            size="large">
+        Anterior
+    </p-button>
