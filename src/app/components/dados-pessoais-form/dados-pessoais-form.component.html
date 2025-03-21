@@ -10,7 +10,7 @@
             }
         </div>
     </div>
-    
+
     <div class="row" id="row2">
         <!-- Input data -->
         <div class="input-container">
@@ -29,7 +29,7 @@
                 <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
             }
         </div>
-        
+
         <!-- Input sexo -->
         <div class="radio-button-group">
             <label> Sexo: </label>
@@ -83,12 +83,12 @@
         <!-- Input categoria CNH -->
         <div class="input-container">
             <label for="catCnh"> Categoria CNH: </label>
-            <p-multiselect inputId="catCnh" [disabled]="desativarCnh" formControlName="catCnhVal" [options]="categoriasCnh" placeholder="Selecione" fluid size="large"/>
+            <p-multiselect inputId="catCnh" formControlName="catCnhVal" [options]="categoriasCnh" placeholder="Selecione" fluid size="large"/>
             @if (dPCntrl['catCnhVal'].invalid && dPCntrl['catCnhVal'].touched) {
                 <p-message severity="error" variant="simple" size="small">Selecione uma das opções!</p-message>
             }
         </div>
 
     </div>
-    
+
 </form>

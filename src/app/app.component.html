@@ -22,43 +22,43 @@
 
             <!-- Form Dados Pessoais -->
             <p-tabpanel [value]="0" id="dadosPessoaisTab">
-                <app-dados-pessoais-form />
+              <app-dados-pessoais-form [formDadosPessoais]="dadosPessoaisForm"/>
             </p-tabpanel>
 
             <!-- Form Endereço -->
             <p-tabpanel [value]="1" id="enderecoTab">
-                <app-endereco-form/>
+              <app-endereco-form [formEndereco]="enderecoForm"/>
             </p-tabpanel>
 
             <!-- Form Contato -->
             <p-tabpanel [value]="2" id="contatoTab">
-                <app-contato-form/>
+              <app-contato-form [formContato]="contatoForm"/>
             </p-tabpanel>
 
             <!-- Form Área de Interesse -->
             <p-tabpanel [value]="3" id="areaDeInterresseTab">
-                <p>placeholder</p>
+              <app-area-interesse-form [formAreaInteresse]="areaInteresseForm"/>
             </p-tabpanel>
 
             <!-- Form Informações Adicionais -->
             <p-tabpanel [value]="4" id="informacoesAdicionaisTab">
-                <p>placeholder</p>
+              <app-infos-adicionais-form [formInfosAdicionais]="infosAdicionaisForm" />
             </p-tabpanel>
 
             <!-- Form Formação -->
             <p-tabpanel [value]="5" id="formacaoTab">
-                <p>placeholder</p>
+              <app-formacao-form [formFormacao]="formacaoForm"/>
             </p-tabpanel>
 
             <!-- Form Experiência Profissional -->
             <p-tabpanel [value]="6" id="experienciaProfissionalTab">
-                <p>placeholder</p>
+              <app-experiencia-profissional-form [formExpProfissional]="experienciaProfissionalForm"/>
             </p-tabpanel>
 
         </p-tabpanels>
 
     </p-tabs>
 
-    <app-botoes [tabAtual]='tabAtualMain' (tabEvent)="setTab($event)"/>
+    <app-botoes [tabAtual]='tabAtualMain' (tabEvent)="setTab($event)" [formPrincipal]="form"/>
 
 </div>

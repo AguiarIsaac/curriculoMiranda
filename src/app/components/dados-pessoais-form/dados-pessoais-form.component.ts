@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 import { ImportsModule } from '../imports';
 
@@ -17,25 +17,11 @@ interface EstadoCivil {
   styleUrl: './dados-pessoais-form.component.css'
 })
 export class DadosPessoaisFormComponent {
-  formDadosPessoais: FormGroup;
-
-  constructor (private fb: FormBuilder) {
-    this.formDadosPessoais = this.fb.group({
-      nomeVal: ['', Validators.required],
-      dataVal: ['', Validators.required],
-      ecVal: ['', Validators.required],
-      sxVal: ['F', Validators.required],
-      rgVal: ['', [Validators.required, Validators.pattern('\\d{2}\\.\\d{3}\\.\\d{3}-\\d')]],
-      cpfVal: ['', [Validators.required, Validators.pattern('\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}')]],
-      pCnhVal: ['S', Validators.required],
-      catCnhVal: [{value: [], disabled: false}, Validators.required]
-    })
-  }
+  @Input() formDadosPessoais!: FormGroup;
 
   get dPCntrl() {
     return this.formDadosPessoais.controls;
   }
-
 
   // Lista para o select de estado civil
   estCiv: EstadoCivil[] = [
@@ -61,10 +47,8 @@ export class DadosPessoaisFormComponent {
 
   alterarCatCnh(){
     if(this.dPCntrl['pCnhVal'].value === 'S'){
-      this.desativarCnh = false
       this.dPCntrl['catCnhVal'].enable()
     } else {
-      this.desativarCnh = true
       this.dPCntrl['catCnhVal'].disable()
       this.dPCntrl['catCnhVal'].setValue(undefined)
     }

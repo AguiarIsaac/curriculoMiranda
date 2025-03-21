@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Input} from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 import { ImportsModule } from '../imports';
 
@@ -12,19 +12,7 @@ import { ImportsModule } from '../imports';
   styleUrl: './endereco-form.component.css'
 })
 export class EnderecoFormComponent {
-  formEndereco: FormGroup;
-
-  constructor (private fb: FormBuilder) {
-    this.formEndereco = this.fb.group({
-      endVal: ['', Validators.required],
-      bairroVal: ['', Validators.required],
-      numVal: [undefined, Validators.required],
-      compVal: [undefined],
-      estadoVal: ['', Validators.required],
-      cidVal: ['', Validators.required],
-      cepVal: ['', [Validators.required, Validators.pattern('\\d{5}\\-\\d{3}')]],
-    })
-  }
+  @Input() formEndereco!: FormGroup;
 
   get endCntrl() {
     return this.formEndereco.controls;

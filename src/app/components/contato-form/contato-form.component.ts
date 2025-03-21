@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ImportsModule } from '../imports';
@@ -13,18 +13,7 @@ import { ImportsModule } from '../imports';
   styleUrl: './contato-form.component.css'
 })
 export class ContatoFormComponent {
-  formContato: FormGroup;
-
-  constructor (private fb: FormBuilder) {
-    this.formContato = this.fb.group({
-      telResVal: [''],
-      celVal: ['', Validators.required],
-      emailVal: ['', [Validators.required, Validators.email]],
-      lkdInVal: [''],
-      facebookVal: [''],
-      instagramVal: ['']
-    })
-  }
+  @Input() formContato!: FormGroup;
 
   get contCntrl() {
     return this.formContato.controls;
