@@ -1,0 +1,13 @@
+.dialog-button-container{
+  display: flex;
+  gap: 1rem;
+  padding-top: 2rem;
+  justify-content: right;
+}
+
+.dialog-input-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 1.5rem;
+}

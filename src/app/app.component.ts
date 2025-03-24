@@ -57,12 +57,12 @@ export class AppComponent implements OnInit{
       }),
 
       areaInteresse: this.fb.group({
-        nvlHrVal: [''],
-        areaAtVal: [''],
-        cargoVal: ['']
+        nvlHrVal: ['', Validators.required],
+        areaAtVal: ['', Validators.required],
+        cargoVal: ['', Validators.required]
       }),
 
-      infosAdicionionais: this.fb.group({
+      infosAdicionais: this.fb.group({
         ptSalVal: [''],
         dpViagemVal: [''],
         dpMudarVal: [''],
@@ -72,12 +72,7 @@ export class AppComponent implements OnInit{
       }),
 
       formacao: this.fb.group({
-        formacaoVal: [''],
-        descCursoVal: [''],
-        iniVal: [''],
-        fimVal: [''],
-        qtHrsVal: [''],
-        instituicaoVal: ['']
+        formacoesVal: [[]],
       }),
 
       experienciaProfissional: this.fb.group({

@@ -3,7 +3,7 @@
         <!-- Input Endereço -->
         <div class="input-container">
             <label for="endereco"> Endereço: </label>
-            <input inputId="endereco" type="text" pInputText formControlName="endVal" placeholder="Endereço" pSize="large"/>
+            <input id="endereco" type="text" pInputText formControlName="endVal" placeholder="Endereço" pSize="large"/>
             @if (endCntrl['endVal'].invalid && endCntrl['endVal'].touched) {
                 <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
             }
@@ -14,7 +14,7 @@
         <!-- Input Bairro -->
         <div class="input-container">
             <label for="bairro"> Bairro: </label>
-            <input inputId="bairro" type="text" pInputText formControlName="bairroVal" placeholder="Bairro" pSize="large"/>
+            <input id="bairro" type="text" pInputText formControlName="bairroVal" placeholder="Bairro" pSize="large"/>
             @if (endCntrl['bairroVal'].invalid && endCntrl['bairroVal'].touched) {
                 <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
             }
@@ -23,7 +23,7 @@
         <!-- Input Número -->
         <div class="input-container">
             <label for="numero"> Número: </label>
-            <p-input-number inputId="numero" formControlName="numVal" [useGrouping]="false" placeholder="Numero" size="large"/>
+            <p-input-number id="numero" formControlName="numVal" [useGrouping]="false" placeholder="Numero" size="large"/>
             @if (endCntrl['numVal'].invalid && endCntrl['numVal'].touched) {
                 <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
             }
@@ -32,7 +32,7 @@
         <!-- Input Complemento -->
         <div class="input-container">
             <label for="complemento"> Complemento: </label>
-            <input inputId="complemento" type="text" pInputText formControlName="compVal" placeholder="Complemento" pSize="large"/>
+            <input id="complemento" type="text" pInputText formControlName="compVal" placeholder="Complemento" pSize="large"/>
         </div>
     </div>
 
@@ -40,7 +40,7 @@
         <!-- Input Estado -->
         <div class="input-container">
             <label for="estado"> Estado: </label>
-            <p-select inputId="estado" formControlName="estadoVal" [options]="estado" placeholder="Selecione" fluid size="large"/>
+            <p-select id="estado" formControlName="estadoVal" [options]="estado" placeholder="Selecione" fluid size="large"/>
             @if (endCntrl['estadoVal'].invalid && endCntrl['estadoVal'].touched) {
                 <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
             }
@@ -49,7 +49,7 @@
         <!-- Input Cidade -->
         <div class="input-container">
             <label for="cidade"> Cidade: </label>
-            <input inputId="cidade" type="text" pInputText formControlName="cidVal" placeholder="Cidade" pSize="large"/>
+            <input id="cidade" type="text" pInputText formControlName="cidVal" placeholder="Cidade" pSize="large"/>
             @if (endCntrl['cidVal'].invalid && endCntrl['cidVal'].touched) {
                 <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
             }
@@ -58,7 +58,7 @@
         <!-- Input CEP -->
         <div class="input-container">
             <label for="cep"> CEP: </label>
-            <p-inputmask #cep inputId="cep" formControlName="cepVal" mask="99999-999" placeholder="CEP" size="large" autoClear="false" />
+            <p-inputmask #cep id="cep" formControlName="cepVal" mask="99999-999" placeholder="CEP" size="large" autoClear="false" />
             @if (endCntrl['cepVal'].hasError('required') && endCntrl['cepVal'].touched) {
                 <p-message severity="error" variant="simple" size="small">Preencha o campo antes de continuar!</p-message>
             } @else if (endCntrl['cepVal'].hasError('pattern') && !cep.focused) {

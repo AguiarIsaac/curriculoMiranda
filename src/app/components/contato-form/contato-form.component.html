@@ -1,9 +1,9 @@
-<form class="form-container" id="formContato" [formGroup]="formContato"> <!-- (ngSubmit)="enviarFormulario()" -->
+<form class="form-container" id="formContato" [formGroup]="formContato">
     <div class="row" id="row6">
         <div class="input-container">
             <label for="telResidencial"> Telefone Residencial: </label>
             <p-input-group>
-                <input inputId="telResidencial" type="text" pInputText formControlName="telResVal" placeholder="Telefone" pSize="large"/>
+                <input id="telResidencial" type="text" pInputText formControlName="telResVal" placeholder="Telefone" pSize="large"/>
                 <p-inputgroup-addon>
                     <i class="pi pi-phone" style="font-size: 1.5rem"></i>
                 </p-inputgroup-addon>
@@ -13,7 +13,7 @@
         <div class="input-container">
             <label for="celular"> Celular:* </label>
             <div class="input-icon-container">
-                <p-input-mask inputId="celular" formControlName="celVal" mask="(99)999999999" slotChar=" " placeholder="Celular" size="large" autoClear="false"/>
+                <p-input-mask id="celular" formControlName="celVal" mask="(99)999999999" slotChar=" " placeholder="Celular" size="large" autoClear="false"/>
                 <p-inputgroup-addon>
                     <i class="pi pi-mobile" style="font-size: 1.5rem"></i>
                 </p-inputgroup-addon>
@@ -28,7 +28,7 @@
         <div class="input-container">
             <label for="email"> E-mail:* </label>
             <p-input-group>
-                <input #email inputId="email" type="text" pInputText formControlName="emailVal" placeholder="exemplo@email.com" pSize="large"/>
+                <input #email id="email" type="text" pInputText formControlName="emailVal" placeholder="exemplo@email.com" pSize="large"/>
                 <p-inputgroup-addon>
                     <i class="pi pi-envelope" style="font-size: 1.5rem"></i>
                 </p-inputgroup-addon>
@@ -43,7 +43,7 @@
         <div class="input-container">
             <label for="linkedin"> LinkedIn: </label>
             <p-input-group>
-                <input inputId="linkedin" type="text" pInputText formControlName="lkdInVal" pSize="large"/>
+                <input id="linkedin" type="text" pInputText formControlName="lkdInVal" pSize="large"/>
                 <p-inputgroup-addon>
                     <i class="pi pi-linkedin" style="font-size: 1.5rem"></i>
                 </p-inputgroup-addon>
@@ -55,7 +55,7 @@
         <div class="input-container">
             <label for="facebook"> Facebook: </label>
             <p-inputgroup>
-                <input inputId="facebook" type="text" pInputText formControlName="facebookVal" pSize="large"/>
+                <input id="facebook" type="text" pInputText formControlName="facebookVal" pSize="large"/>
                 <p-inputgroup-addon>
                     <i class="pi pi-facebook" style="font-size: 1.5rem"></i>
                 </p-inputgroup-addon>
@@ -65,7 +65,7 @@
         <div class="input-container">
             <label for="instagram"> Instagram: </label>
             <p-inputgroup>
-                <input inputId="instagram" type="text" pInputText formControlName="instagramVal" pSize="large"/>
+                <input id="instagram" type="text" pInputText formControlName="instagramVal" pSize="large"/>
                 <p-inputgroup-addon>
                     <i class="pi pi-instagram" style="font-size: 1.5rem"></i>
                 </p-inputgroup-addon>

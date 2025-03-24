@@ -1,1 +1,39 @@
-<p>infos-adicionais-form works!</p>
+<form class="form-container" id="formAreaInteresse" [formGroup]="formInfosAdicionais">
+  <div class="row" id="row12">
+    <div class="input-container">
+      <label for="pretensaoSalarial"> Pretensão Salarial: </label>
+      <p-select id="pretensaoSalarial" formControlName="ptSalVal" [options]="listaPtSal" placeholder="Selecione" fluid size="large" scrollHeight="20rem"/>
+    </div>
+  </div>
+
+  <div class="checkbox-row" id="row13">
+    <div class="checkbox-container">
+      <label class="checkbox-label" for="dpViagem" > Disponibilidade para viagem: </label>
+      <p-checkbox id="dpViagem" formControlName="dpViagemVal" binary="true" trueValue="S" falseValue="N" size="large"/>
+    </div>
+
+    <div class="checkbox-container">
+      <label class="checkbox-label" for="dpMudarCid"> Disponibilidade para mudar de cidade: </label>
+      <p-checkbox id="dpMudarCid" formControlName="dpMudarVal" binary="true" trueValue="S" falseValue="N" size="large"/>
+    </div>
+
+    <div class="checkbox-container">
+      <label class="checkbox-label" for="pIndicacao"> Recebeu indicação? </label>
+      <p-checkbox id="pIndicacao" formControlName="pIndicacaoVal" binary="true" trueValue="S" falseValue="N" size="large"/>
+    </div>
+
+    <div class="checkbox-container">
+      <label class="checkbox-label" for="pDeficiencia"> Possui Deficiência? </label>
+      <p-checkbox id="pDeficiencia" formControlName="pDeficienciaVal" binary="true" trueValue="S" falseValue="N" size="large"/>
+    </div>
+
+  </div>
+
+  <div class="row" id="row14">
+    <div class="input-container">
+      <label for="consideracoes"> Considerações: </label>
+      <textarea id="consideracoes" pTextarea rows="5" cols="30" formControlName="consideracoesVal" autoResize="true" fluid pSize="small"></textarea>
+    </div>
+  </div>
+
+</form>

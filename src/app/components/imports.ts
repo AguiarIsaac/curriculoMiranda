@@ -12,12 +12,16 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { TabsModule } from 'primeng/tabs';
 import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { CheckboxModule } from 'primeng/checkbox';
+import { TextareaModule } from 'primeng/textarea';
+import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
     imports: [
-        FormsModule, 
+        FormsModule,
         ReactiveFormsModule,
-    
+
         InputTextModule,
         InputGroupModule,
         InputGroupAddonModule,
@@ -29,12 +33,16 @@ import { InputNumberModule } from 'primeng/inputnumber';
         MultiSelectModule,
         TabsModule,
         ButtonModule,
-        InputNumberModule
+        InputNumberModule,
+        CheckboxModule,
+        TextareaModule,
+        TableModule,
+        DialogModule
     ],
     exports: [
-        FormsModule, 
+        FormsModule,
         ReactiveFormsModule,
-    
+
         InputTextModule,
         InputGroupModule,
         InputGroupAddonModule,
@@ -46,7 +54,11 @@ import { InputNumberModule } from 'primeng/inputnumber';
         MultiSelectModule,
         TabsModule,
         ButtonModule,
-        InputNumberModule
+        InputNumberModule,
+        CheckboxModule,
+        TextareaModule,
+        TableModule,
+        DialogModule
     ],
     providers: [ ]
 })
