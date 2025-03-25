@@ -1,25 +1,93 @@
-<form class="form-container" id="formFormacao" [formGroup]="formFormacao">
+<form class="form-container" id="formFormacao" [formGroup]="dialogFormFormacao">
+
   <div>
     <p-button (click)="showDialog()" label="+ Adicionar" />
   </div>
 
-  <p-dialog header="Adicionar Formação" [modal]="true" [(visible)]="visible" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+  <!-- Dialog Nova Formação -->
+  <p-dialog #dialog header="Adicionar Formação" [modal]="true" [(visible)]="visible" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="true">
+
+    <!-- Inputs -->
     <div class="dialog-input-container" id="row15">
+
+      <!-- Select Formação -->
       <div class="input-container">
-        <label for="username" class="font-semibold w-24">Username</label>
-        <input pInputText id="username" class="flex-auto" autocomplete="off" />
+        <label for="formacaoSelect"> Formação: </label>
+        <p-select id="formacaoSelect" formControlName="formacaoVal" [options]="listaSelFormacoes" placeholder="Selecione" fluid size="large"/>
+        @if (diaFormCntrl['formacaoVal'].invalid && diaFormCntrl['formacaoVal'].touched) {
+            <p-message severity="error" variant="simple" size="small">Selecione antes de continuar!</p-message>
+        }
       </div>
 
+      <!-- Input Desc/Curso -->
       <div class="input-container">
-        <label for="email" class="font-semibold w-24">Email</label>
-        <input pInputText id="email" class="flex-auto" autocomplete="off" />
+        <label for="descricaoCurso"> Descrição/Curso: </label>
+        <input id="descricaoCurso" type="text" pInputText formControlName="descCursoVal" autocomplete="off" pSize="large"/>
       </div>
+
+       <!-- Input Iniciado Em -->
+      <div class="input-container">
+        <label for="iniciadoEm"> Iniciado Em: </label>
+        <p-datepicker id="iniciadoEm" [iconDisplay]="'input'" [showIcon]="true" formControlName="iniVal" placeholder="DD/MM/YYYY" fluid size="large" dataType="string" [appendTo]="dialog"/>
+        @if (diaFormCntrl['iniVal'].invalid && diaFormCntrl['iniVal'].touched) {
+            <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
+        }
+      </div>
+
+       <!-- Input Finalizado Em -->
+      <div class="input-container">
+        <label for="finalizadoEm"> Finalizado Em: </label>
+        <p-datepicker id="finalizadoEm" [iconDisplay]="'input'" [showIcon]="true" formControlName="fimVal" dateFormat="dd/mm/yy" fluid size="large" [appendTo]="dialog"/>
+      </div>
+
+       <!-- Input Quantidade Horas -->
+      <div class="input-container">
+        <label for="qtdHoras"> Quantidade Horas: </label>
+        <p-input-number id="qtdHoras" formControlName="qtHrsVal" [useGrouping]="false" size="large"/>
+      </div>
+
+       <!-- Input Instituição -->
+      <div class="input-container">
+        <label for="instituicao"> Instituição: </label>
+        <input id="instituicao" type="text" pInputText formControlName="instituicaoVal" autocomplete="off" pSize="large"/>
+        @if (diaFormCntrl['instituicaoVal'].invalid && diaFormCntrl['instituicaoVal'].touched) {
+          <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
+        }
+      </div>
+
     </div>
 
+    <!-- Botões Dialog -->
     <div class="dialog-button-container">
-        <p-button label="Cancelar" severity="secondary" (click)="visible = false" />
-        <p-button label="Salvar" (click)="visible = false" />
+        <p-button label="Cancelar" severity="secondary" (click)="visible = false" size="large"/>
+        <p-button label="Salvar" [disabled]="!ativarBotao()" (click)="salvarFormacao()" size="large"/>
     </div>
+
   </p-dialog>
+
+  @if (formacoes.length > 0) {
+    <p-table [value]="formacoes" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template #header>
+          <tr>
+              <th>Formação</th>
+              <th>Descrição/Curso</th>
+              <th>Iniciado Em:</th>
+              <th>Finalizado Em:</th>
+              <th>Horas:</th>
+              <th>Instituição:</th>
+          </tr>
+      </ng-template>
+      <ng-template #body let-formacoes>
+          <tr>
+              <td>{{ formacoes.formacaoVal }}</td>
+              <td>{{ formacoes.descCursoVal }}</td>
+              <td>{{ formacoes.iniVal }}</td>
+              <td>{{ formacoes.fimVal }}</td>
+              <td>{{ formacoes.qtHrsVal }}</td>
+              <td>{{ formacoes.instituicaoVal }}</td>
+          </tr>
+      </ng-template>
+    </p-table>
+  }
 
 </form>

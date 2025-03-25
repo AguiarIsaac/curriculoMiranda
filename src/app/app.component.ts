@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, LOCALE_ID, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { componentsModule } from './components/components';
 import { TabsModule } from 'primeng/tabs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PrimeNG } from 'primeng/config';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +13,25 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     TabsModule
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  providers: [
+    { provide: LOCALE_ID, useValue: 'pt-BR' } // Define pt-BR como padrão globalmente
+  ],
 })
 export class AppComponent implements OnInit{
   form!: FormGroup;
   tabAtualMain: number = 0;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private PrimeNGConfig: PrimeNG, private fb: FormBuilder) {
+    this.PrimeNGConfig.setTranslation({
+      dayNames: ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"],
+      dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+      dayNamesMin: ["D", "S", "T", "Q", "Q", "S", "S"],
+      monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+      monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+      dateFormat: "dd/mm/yy",
+    })
+  }
 
   ngOnInit() {
     this.inicializarForms()
