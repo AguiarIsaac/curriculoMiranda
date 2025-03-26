@@ -2,8 +2,8 @@
     <div class="row" id="row1">
         <!-- Input nome -->
         <div class="input-container">
-            <label for="nome"> Nome: </label>
-            <input id="nome" type="text" pInputText formControlName="nomeVal" placeholder="Nome" pSize="large"/>
+            <label for="nome"> Nome:* </label>
+            <input id="nome" type="text" pInputText formControlName="nomeVal" placeholder="Nome" autocomplete="off" pSize="large"/>
             @if (dPCntrl['nomeVal'].invalid && dPCntrl['nomeVal'].touched) {
                 <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
             }
@@ -13,7 +13,7 @@
     <div class="row" id="row2">
         <!-- Input data -->
         <div class="input-container">
-            <label for="dataNascimento"> Data de Nascimento: </label>
+            <label for="dataNascimento"> Data de Nascimento:* </label>
             <p-datepicker id="dataNascimento" [iconDisplay]="'input'" [showIcon]="true" formControlName="dataVal" dateFormat="dd/mm/yy" placeholder="DD/MM/YYYY" fluid size="large"/>
             @if (dPCntrl['dataVal'].invalid && dPCntrl['dataVal'].touched) {
                 <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
@@ -22,7 +22,7 @@
 
         <!-- Input estado civil -->
         <div class="input-container">
-            <label for="estadoCivil"> Estado Civil: </label>
+            <label for="estadoCivil"> Estado Civil:* </label>
             <p-select id="estadoCivil" formControlName="ecVal" [options]="estCiv" optionLabel="viewValue" placeholder="Selecione" fluid size="large"/>
             @if (dPCntrl['ecVal'].invalid && dPCntrl['ecVal'].touched) {
                 <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
@@ -31,7 +31,7 @@
 
         <!-- Input sexo -->
         <div class="radio-button-group">
-            <label for="sexo"> Sexo: </label>
+            <label for="sexo"> Sexo:* </label>
             <div class="radio-button-container" id="sexo">
               @for (op of opSx; track op) {
                 <div class="radio-button-container" [id]="op.divId">
@@ -46,7 +46,7 @@
     <div class="row" id="row3">
         <!-- Input rg -->
         <div class="input-container">
-            <label for="rg"> RG: </label>
+            <label for="rg"> RG:* </label>
             <p-inputmask #rg id="rg" formControlName="rgVal" mask="99.999.999-9" placeholder="99.999.999-9" size="large" autoClear="false"/>
             @if (dPCntrl['rgVal'].hasError('required') && dPCntrl['rgVal'].touched) {
                 <p-message severity="error" variant="simple" size="small">Preencha o campo antes de continuar!</p-message>
@@ -57,7 +57,7 @@
 
         <!-- Input cpf -->
         <div class="input-container">
-            <label for="cpf"> CPF: </label>
+            <label for="cpf"> CPF:* </label>
             <p-inputmask #cpf id="cpf" formControlName="cpfVal" mask="999.999.999-99" placeholder="999.999.999-99" size="large" autoClear="false" />
             @if (dPCntrl['cpfVal'].hasError('required') && dPCntrl['cpfVal'].touched) {
                 <p-message severity="error" variant="simple" size="small">Preencha o campo antes de continuar!</p-message>
@@ -68,7 +68,7 @@
 
         <!-- Input CNH? -->
         <div class="radio-button-group">
-            <label for="pCnh"> Possui CNH?: </label>
+            <label for="pCnh"> Possui CNH?:* </label>
             <div class="radio-button-container" id="pCnh">
               @for (op of opCnh; track op) {
                   <div class="radio-button-container" [id]="op.divId">
@@ -81,7 +81,7 @@
 
         <!-- Input categoria CNH -->
         <div class="input-container">
-            <label for="catCnh"> Categoria CNH: </label>
+            <label for="catCnh"> Categoria CNH:* </label>
             <p-multiselect id="catCnh" formControlName="catCnhVal" [options]="categoriasCnh" placeholder="Selecione" fluid size="large"/>
             @if (dPCntrl['catCnhVal'].invalid && dPCntrl['catCnhVal'].touched) {
                 <p-message severity="error" variant="simple" size="small">Selecione uma das opções!</p-message>

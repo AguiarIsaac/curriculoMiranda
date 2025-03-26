@@ -1,7 +1,7 @@
 <form class="form-container" id="formAreaInteresse" [formGroup]="formAreaInteresse">
   <div class="row" id="row9">
     <div class="input-container">
-      <label for="nvlHierarquico"> Nível Hierárquico: </label>
+      <label for="nvlHierarquico"> Nível Hierárquico:* </label>
       <p-select id="nvlHierarquico" formControlName="nvlHrVal" [options]="listaNvlHr" placeholder="Selecione" fluid size="large" scrollHeight="20rem"/>
       @if (areaIntCntrl['nvlHrVal'].invalid && areaIntCntrl['nvlHrVal'].touched) {
         <p-message severity="error" variant="simple" size="small">Selecione antes de continuar!</p-message>
@@ -11,7 +11,7 @@
 
   <div class="row" id="row10">
     <div class="input-container">
-      <label for="areaAtuacao"> Área de Atuação: </label>
+      <label for="areaAtuacao"> Área de Atuação:* </label>
       <p-select id="areaAtuacao" formControlName="areaAtVal" [options]="listaAreaAt" placeholder="Selecione" fluid size="large" scrollHeight="20rem"/>
       @if (areaIntCntrl['areaAtVal'].invalid && areaIntCntrl['areaAtVal'].touched) {
         <p-message severity="error" variant="simple" size="small">Selecione antes de continuar!</p-message>
@@ -21,7 +21,7 @@
 
   <div class="row" id="row11">
     <div class="input-container">
-      <label for="cargoPretendido"> Cargo Pretendido: </label>
+      <label for="cargoPretendido"> Cargo Pretendido:* </label>
       <p-select id="cargoPretendido" formControlName="cargoVal" [options]="listaCargo" placeholder="Selecione" fluid size="large" scrollHeight="20rem"/>
       @if (areaIntCntrl['cargoVal'].invalid && areaIntCntrl['cargoVal'].touched) {
         <p-message severity="error" variant="simple" size="small">Selecione antes de continuar!</p-message>

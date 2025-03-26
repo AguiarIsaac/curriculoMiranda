@@ -16,6 +16,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { TextareaModule } from 'primeng/textarea';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
     imports: [
@@ -37,7 +38,8 @@ import { DialogModule } from 'primeng/dialog';
         CheckboxModule,
         TextareaModule,
         TableModule,
-        DialogModule
+        DialogModule,
+        ConfirmDialogModule
     ],
     exports: [
         FormsModule,
@@ -58,7 +60,8 @@ import { DialogModule } from 'primeng/dialog';
         CheckboxModule,
         TextareaModule,
         TableModule,
-        DialogModule
+        DialogModule,
+        ConfirmDialogModule
     ],
     providers: [ ]
 })

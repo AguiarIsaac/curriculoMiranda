@@ -1,10 +1,6 @@
-<form class="form-container" id="formFormacao" [formGroup]="dialogFormFormacao">
+<form style="padding: 2rem 0rem" id="formFormacao" [formGroup]="dialogFormFormacao">
 
-  <div>
-    <p-button (click)="showDialog()" label="+ Adicionar" />
-  </div>
-
-  <!-- Dialog Nova Formação -->
+    <!-- Dialog Formação -->
   <p-dialog #dialog header="Adicionar Formação" [modal]="true" [(visible)]="visible" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="true">
 
     <!-- Inputs -->
@@ -12,7 +8,7 @@
 
       <!-- Select Formação -->
       <div class="input-container">
-        <label for="formacaoSelect"> Formação: </label>
+        <label for="formacaoSelect"> Formação:* </label>
         <p-select id="formacaoSelect" formControlName="formacaoVal" [options]="listaSelFormacoes" placeholder="Selecione" fluid size="large"/>
         @if (diaFormCntrl['formacaoVal'].invalid && diaFormCntrl['formacaoVal'].touched) {
             <p-message severity="error" variant="simple" size="small">Selecione antes de continuar!</p-message>
@@ -25,30 +21,30 @@
         <input id="descricaoCurso" type="text" pInputText formControlName="descCursoVal" autocomplete="off" pSize="large"/>
       </div>
 
-       <!-- Input Iniciado Em -->
+        <!-- Input Iniciado Em -->
       <div class="input-container">
-        <label for="iniciadoEm"> Iniciado Em: </label>
+        <label for="iniciadoEm"> Iniciado Em:* </label>
         <p-datepicker id="iniciadoEm" [iconDisplay]="'input'" [showIcon]="true" formControlName="iniVal" placeholder="DD/MM/YYYY" fluid size="large" dataType="string" [appendTo]="dialog"/>
         @if (diaFormCntrl['iniVal'].invalid && diaFormCntrl['iniVal'].touched) {
             <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
         }
       </div>
 
-       <!-- Input Finalizado Em -->
+        <!-- Input Finalizado Em -->
       <div class="input-container">
         <label for="finalizadoEm"> Finalizado Em: </label>
-        <p-datepicker id="finalizadoEm" [iconDisplay]="'input'" [showIcon]="true" formControlName="fimVal" dateFormat="dd/mm/yy" fluid size="large" [appendTo]="dialog"/>
+        <p-datepicker id="finalizadoEm" [iconDisplay]="'input'" [showIcon]="true" formControlName="fimVal" fluid size="large" dataType="string" [appendTo]="dialog"/>
       </div>
 
-       <!-- Input Quantidade Horas -->
+        <!-- Input Quantidade Horas -->
       <div class="input-container">
         <label for="qtdHoras"> Quantidade Horas: </label>
         <p-input-number id="qtdHoras" formControlName="qtHrsVal" [useGrouping]="false" size="large"/>
       </div>
 
-       <!-- Input Instituição -->
+        <!-- Input Instituição -->
       <div class="input-container">
-        <label for="instituicao"> Instituição: </label>
+        <label for="instituicao"> Instituição:* </label>
         <input id="instituicao" type="text" pInputText formControlName="instituicaoVal" autocomplete="off" pSize="large"/>
         @if (diaFormCntrl['instituicaoVal'].invalid && diaFormCntrl['instituicaoVal'].touched) {
           <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
@@ -66,28 +62,43 @@
   </p-dialog>
 
   @if (formacoes.length > 0) {
-    <p-table [value]="formacoes" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-confirmdialog />
+
+    <p-table [value]="formacoes" [tableStyle]="{ 'min-width': '50rem' }" [scrollable]="true" columnResizeMode="expand">
       <ng-template #header>
           <tr>
-              <th>Formação</th>
-              <th>Descrição/Curso</th>
-              <th>Iniciado Em:</th>
-              <th>Finalizado Em:</th>
-              <th>Horas:</th>
-              <th>Instituição:</th>
+              <th pResizableColumn>Formação</th>
+              <th pResizableColumn>Descrição/Curso</th>
+              <th pResizableColumn>Iniciado Em:</th>
+              <th pResizableColumn>Finalizado Em:</th>
+              <th pResizableColumn>Horas:</th>
+              <th pResizableColumn>Instituição:</th>
+              <th style="width: 7rem;"></th>
           </tr>
       </ng-template>
-      <ng-template #body let-formacoes>
+      <ng-template #body let-formacao>
           <tr>
-              <td>{{ formacoes.formacaoVal }}</td>
-              <td>{{ formacoes.descCursoVal }}</td>
-              <td>{{ formacoes.iniVal }}</td>
-              <td>{{ formacoes.fimVal }}</td>
-              <td>{{ formacoes.qtHrsVal }}</td>
-              <td>{{ formacoes.instituicaoVal }}</td>
+              <td>{{ formacao.formacaoVal }}</td>
+              <td>{{ formacao.descCursoVal }}</td>
+              <td>{{ formacao.iniVal }}</td>
+              <td>{{ formacao.fimVal }}</td>
+              <td>{{ formacao.qtHrsVal }}</td>
+              <td>{{ formacao.instituicaoVal }}</td>
+              <td class="table-button-container">
+                <p-button icon="pi pi-pencil" (click)="editarFormacao(formacao, formacoes.indexOf(formacao))" severity="secondary" rounded />
+                <p-button icon="pi pi-trash" (click)="confirm($event, formacao, formacoes.indexOf(formacao))" severity="contrast" rounded />
+              </td>
           </tr>
       </ng-template>
     </p-table>
+
+    <div class="button-row" id="row16">
+      <p-button (click)="showDialog()" label="+ Adicionar" size="large"/>
+    </div>
+  } @else {
+    <div class="button-row" style="justify-content: center;" id="row16">
+      <p-button (click)="showDialog()" label="Adicionar Formação" size="large" severity="primary"/>
+    </div>
   }
 
 </form>

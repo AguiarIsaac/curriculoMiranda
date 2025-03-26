@@ -11,3 +11,8 @@
   width: 100%;
   gap: 1.5rem;
 }
+
+.table-button-container {
+  display: flex;
+  gap: 1.5rem;
+}
