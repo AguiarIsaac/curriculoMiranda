@@ -1,1 +1,137 @@
-<p>experiencia-profissional-form works!</p>
+<form style="padding: 2rem 0rem" id="formFormacao" [formGroup]="dialogFormExpPro">
+
+  <!-- Dialog Formação -->
+  <p-dialog #dialog header="Experiência Profissional" [modal]="true" [(visible)]="visible" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="true">
+
+    <!-- Inputs -->
+    <div class="dialog-input-container" id="row17">
+
+      <!-- Input Nome Empresa -->
+      <div class="input-container">
+        <label for="nomeEmp"> Nome da Empresa:* </label>
+        <input id="nomeEmp" type="text" pInputText formControlName="nomeEmpVal" autocomplete="off" pSize="large"/>
+        @if (expProCntrl['nomeEmpVal'].invalid && expProCntrl['nomeEmpVal'].touched) {
+          <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
+        }
+      </div>
+
+      <!-- Select Tipo Empresa -->
+      <div class="input-container">
+        <label for="tipEmp"> Tipo de Empresa:* </label>
+        <p-select id="tipEmp" formControlName="tipEmpVal" [options]="listaTipEmp" placeholder="Selecione" fluid size="large"/>
+        @if (expProCntrl['tipEmpVal'].invalid && expProCntrl['tipEmpVal'].touched) {
+            <p-message severity="error" variant="simple" size="small">Selecione antes de continuar!</p-message>
+        }
+      </div>
+
+      <!-- Input Endereço -->
+      <div class="input-container">
+        <label for="enderecoEmp"> Endereço (Empresa): </label>
+        <input id="enderecoEmp" type="text" pInputText formControlName="endEmpVal" autocomplete="off" pSize="large"/>
+      </div>
+
+      <!-- Input E-mail -->
+      <div class="input-container">
+        <label for="emailEmp"> E-mail: </label>
+        <input id="emailEmp" type="text" pInputText formControlName="emailEmpVal" pSize="large"/>
+        @if (expProCntrl['emailEmpVal'].invalid && expProCntrl['emailEmpVal'].touched) {
+          <p-message severity="error" variant="simple" size="small">E-mail inválido.</p-message>
+        }
+      </div>
+
+      <!-- Input Telefone -->
+      <div class="input-container">
+        <label for="telefoneEmp"> Telefone (Empresa): </label>
+        <input id="telefoneEmp" type="text" pInputText formControlName="telEmpVal" autocomplete="off" pSize="large"/>
+      </div>
+
+      <!-- Input Data Admissão -->
+      <div class="input-container">
+        <label for="dataAdmissao"> Data de Admissão:* </label>
+        <p-datepicker id="dataAdmissao" [iconDisplay]="'input'" [showIcon]="true" formControlName="dtAdmVal" placeholder="DD/MM/YYYY" fluid size="large" dataType="string" [appendTo]="dialog"/>
+        @if (expProCntrl['dtAdmVal'].invalid && expProCntrl['dtAdmVal'].touched) {
+            <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
+        }
+      </div>
+
+      <!-- Input Data Demissão -->
+      <div class="input-container">
+        <label for="dataDemissao"> Data de Demissão: </label>
+        <p-datepicker id="dataDemissao" [iconDisplay]="'input'" [showIcon]="true" formControlName="dtDmsVal" placeholder="DD/MM/YYYY" fluid size="large" dataType="string" [appendTo]="dialog"/>
+      </div>
+
+      <!-- Input Último Cargo -->
+      <div class="input-container">
+        <label for="ultCargo"> Último Cargo:* </label>
+        <input id="ultCargo" type="text" pInputText formControlName="ultCargoVal" autocomplete="off" pSize="large"/>
+        @if (expProCntrl['ultCargoVal'].invalid && expProCntrl['ultCargoVal'].touched) {
+          <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
+        }
+      </div>
+
+      <!-- Input Último Salário -->
+      <div class="input-container">
+        <label for="ultSalario"> Último Salário:* </label>
+        <input id="ultSalario" type="text" pInputText formControlName="ultSalVal" autocomplete="off" pSize="large"/>
+        @if (expProCntrl['ultSalVal'].invalid && expProCntrl['ultSalVal'].touched) {
+          <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
+        }
+      </div>
+
+      <!-- Input Resumo Atividades -->
+      <div class="input-container">
+        <label for="resumoAtvd"> Resumo das Atividades:* </label>
+        <textarea id="resumoAtvd" pTextarea rows="2" cols="30" formControlName="resAtvVal" autoResize="true" fluid pSize="large"></textarea>
+      </div>
+
+    </div>
+
+    <!-- Botões Dialog -->
+    <div class="dialog-button-container">
+        <p-button label="Cancelar" severity="secondary" (click)="visible = false" size="large"/>
+        <p-button label="Salvar" [disabled]="!ativarBotao()" (click)="salvarExpProfissional()" size="large"/>
+    </div>
+
+  </p-dialog>
+
+  @if (experienciaPro.length > 0) {
+    <p-confirmdialog />
+
+    <p-table [value]="experienciaPro" [tableStyle]="{ 'min-width': '50rem' }" [scrollable]="true" columnResizeMode="expand">
+      <ng-template #header>
+          <tr>
+              <th pResizableColumn>Nome Empresa:</th>
+              <th pResizableColumn>Tipo Empresa:</th>
+              <th pResizableColumn>Data Admissão:</th>
+              <th pResizableColumn>Último Cargo:</th>
+              <th pResizableColumn>Último Salário:</th>
+              <th pResizableColumn>Resumo Atividades:</th>
+              <th style="width: 7rem;"></th>
+          </tr>
+      </ng-template>
+      <ng-template #body let-exPro>
+          <tr>
+              <td>{{ exPro.nomeEmpVal }}</td>
+              <td>{{ exPro.tipEmpVal }}</td>
+              <td>{{ exPro.dtAdmVal }}</td>
+              <td>{{ exPro.ultCargoVal }}</td>
+              <td>{{ exPro.ultSalVal }}</td>
+              <td>{{ exPro.resAtvVal }}</td>
+              <td class="table-button-container">
+                <p-button icon="pi pi-pencil" (click)="editarExpProfissional(exPro, experienciaPro.indexOf(exPro))" severity="secondary" rounded />
+                <p-button icon="pi pi-trash" (click)="confirm($event, exPro, experienciaPro.indexOf(exPro))" severity="contrast" rounded />
+              </td>
+          </tr>
+      </ng-template>
+    </p-table>
+
+    <div class="button-row" id="row16">
+      <p-button (click)="showDialog()" label="+ Adicionar" size="large"/>
+    </div>
+  } @else {
+    <div class="button-row" style="justify-content: center;" id="row16">
+      <p-button (click)="showDialog()" label="Adicionar Experiência Profissional" size="large" severity="primary"/>
+    </div>
+  }
+
+</form>

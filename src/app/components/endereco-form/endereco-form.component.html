@@ -40,7 +40,7 @@
         <!-- Input Estado -->
         <div class="input-container">
             <label for="estado"> Estado:* </label>
-            <p-select id="estado" formControlName="estadoVal" [options]="estado" placeholder="Selecione" fluid size="large"/>
+            <p-select id="estado" formControlName="estadoVal" [options]="estados"  optionLabel="viewValue" optionValue="value" placeholder="Selecione" fluid size="large"/>
             @if (endCntrl['estadoVal'].invalid && endCntrl['estadoVal'].touched) {
                 <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
             }

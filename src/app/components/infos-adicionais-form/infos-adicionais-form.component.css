@@ -16,10 +16,6 @@
   gap: 4rem;
 }
 
-.p-textarea{
-  min-height: 5rem;
-}
-
 @media (max-width: 1350px) {
   .checkbox-row{
     gap: 1.5rem;

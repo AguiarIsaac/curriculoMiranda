@@ -3,11 +3,6 @@ import { FormGroup } from '@angular/forms';
 
 import { ImportsModule } from '../imports';
 
-interface EstadoCivil {
-  value: string;
-  viewValue: string;
-}
-
 @Component({
   selector: 'app-dados-pessoais-form',
   imports: [
@@ -24,11 +19,14 @@ export class DadosPessoaisFormComponent {
   }
 
   // Lista para o select de estado civil
-  estCiv: EstadoCivil[] = [
-    {value: 'S', viewValue: 'Solteiro(a)'},
-    {value: 'C', viewValue: 'Casado(a)'},
-    {value: 'V', viewValue: 'Viúvo(a)'},
-    {value: 'O', viewValue: 'Outro'}
+  estadoCivil = [
+    'Casado(a)',
+    'Desquitado(a)',
+    'Divorciado(a)',
+    'Separado(a) judicialmente',
+    'Solteiro(a)',
+    'Viúvo(a)',
+    'Outros'
   ]
 
   // Listas opções radio buttons

@@ -89,17 +89,7 @@ export class AppComponent implements OnInit{
       }),
 
       experienciaProfissional: this.fb.group({
-        nomeEmpVal: [''],
-        tipEmpVal: [''],
-        endEmpVal: [''],
-        numEmpVal: [''],
-        emailEmpVal: ['', Validators.email],
-        telEmpVal: [''],
-        dtAdmVal: [''],
-        dtDmsVal: [''],
-        utlCargoVal: [''],
-        utlSalVal: [''],
-        resAtvVal: ['']
+        experienciaProVal: [[]]
       })
 
     })
@@ -133,8 +123,22 @@ export class AppComponent implements OnInit{
     return this.form.get('experienciaProfissional') as FormGroup;
   }
 
+  receberForm(form: FormGroup) {
+    this.form = form;
+    console.log("Formulário Recebido! ", form.value)
+  }
+
   setTab(index: any) {
     this.tabAtualMain = index;
+  }
+
+  ativarTab(index: any) {
+    // if (this.tabAtualMain >= index) {
+    //   return true
+    // } else {
+    //   return false
+    // }
+    return true
   }
 
 

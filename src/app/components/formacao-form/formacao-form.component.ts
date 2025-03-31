@@ -1,9 +1,8 @@
-import { DatePickerModule } from 'primeng/datepicker';
 import { Component, Input} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ConfirmationService } from 'primeng/api';
 
 import { ImportsModule } from '../imports';
-import { ConfirmationService } from 'primeng/api';
 
 interface Formacoes {
   formacaoVal: string,
@@ -59,6 +58,8 @@ export class FormacaoFormComponent {
       this.dialogFormFormacao.markAsUntouched()
 
       this.visible = true;
+
+      console.log(this.indexSelecionado + " || "+ this.formacoes.length)
   }
 
   editarFormacao(formacao: Formacoes, index: number) {
@@ -78,7 +79,7 @@ export class FormacaoFormComponent {
 
   salvarFormacao() {
     if (this.dialogFormFormacao.valid) {
-      if (this.indexSelecionado !== null) {
+      if (this.indexSelecionado != null) {
         this.formacoes[this.indexSelecionado] = this.dialogFormFormacao.value;
         console.log("Formação Editada: ", this.formacoes[this.indexSelecionado]);
 
@@ -97,7 +98,7 @@ export class FormacaoFormComponent {
   excluirFormacao(index: number) {
     this.formacoes.splice(index, 1)
     this.formFormacao.setValue({formacoesVal: this.formacoes})
-    console.log("Formações atuais: ", this.formFormacao.value);
+    console.log("Formações restantes: ", this.formFormacao.value);
   }
 
   ativarBotao() {
@@ -138,5 +139,5 @@ export class FormacaoFormComponent {
         }
 
     });
-}
+  }
 }

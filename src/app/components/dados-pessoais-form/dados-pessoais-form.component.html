@@ -2,7 +2,7 @@
     <div class="row" id="row1">
         <!-- Input nome -->
         <div class="input-container">
-            <label for="nome"> Nome:* </label>
+            <label for="nome"> Nome Completo:* </label>
             <input id="nome" type="text" pInputText formControlName="nomeVal" placeholder="Nome" autocomplete="off" pSize="large"/>
             @if (dPCntrl['nomeVal'].invalid && dPCntrl['nomeVal'].touched) {
                 <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
@@ -23,7 +23,7 @@
         <!-- Input estado civil -->
         <div class="input-container">
             <label for="estadoCivil"> Estado Civil:* </label>
-            <p-select id="estadoCivil" formControlName="ecVal" [options]="estCiv" optionLabel="viewValue" placeholder="Selecione" fluid size="large"/>
+            <p-select id="estadoCivil" formControlName="ecVal" [options]="estadoCivil" placeholder="Selecione" fluid size="large"/>
             @if (dPCntrl['ecVal'].invalid && dPCntrl['ecVal'].touched) {
                 <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
             }

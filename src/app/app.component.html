@@ -10,12 +10,12 @@
 
         <p-tablist>
             <p-tab [value]="0">Dados Pessoais</p-tab>
-            <p-tab [value]="1">Endereço</p-tab>
-            <p-tab [value]="2">Contato</p-tab>
-            <p-tab [value]="3">Área de Interesse</p-tab>
-            <p-tab [value]="4">Informações Adicionais</p-tab>
-            <p-tab [value]="5">Formação</p-tab>
-            <p-tab [value]="6">Experiência Profissional</p-tab>
+            <p-tab #tabEnd [disabled]="!ativarTab(tabEnd.value())" [value]="1">Endereço</p-tab>
+            <p-tab #tabCon [disabled]="!ativarTab(tabCon.value())" [value]="2">Contato</p-tab>
+            <p-tab #tabAre [disabled]="!ativarTab(tabAre.value())" [value]="3">Área de Interesse</p-tab>
+            <p-tab #tabInf [disabled]="!ativarTab(tabInf.value())" [value]="4">Informações Adicionais</p-tab>
+            <p-tab [disabled]="!ativarTab(tabInf.value())" [value]="5">Formação</p-tab>
+            <p-tab [disabled]="!ativarTab(tabInf.value())" [value]="6">Experiência Profissional</p-tab>
         </p-tablist>
 
         <p-tabpanels>
@@ -59,6 +59,6 @@
 
     </p-tabs>
 
-    <app-botoes [tabAtual]='tabAtualMain' (tabEvent)="setTab($event)" [formPrincipal]="form"/>
+    <app-botoes [tabAtual]='tabAtualMain' (tabEvent)="setTab($event)" [formPrincipal]="form" (enviarFormPrincipal)="receberForm($event)"/>
 
 </div>
