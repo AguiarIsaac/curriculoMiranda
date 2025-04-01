@@ -76,6 +76,31 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
   gap: 1.5rem;
 }
 
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0rem;
+}
+
+.checkbox-label {
+  font-size: 1.1rem;
+}
+
+.checkbox-row{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 4rem;
+}
+
+@media (max-width: 1350px) {
+  .checkbox-row{
+    gap: 1.5rem;
+  }
+}
+
+
 @media (max-width: 1000px) {
     .ui-container{
         width: auto;

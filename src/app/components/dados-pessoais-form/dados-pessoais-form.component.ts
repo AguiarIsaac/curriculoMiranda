@@ -13,9 +13,14 @@ import { ImportsModule } from '../imports';
 })
 export class DadosPessoaisFormComponent {
   @Input() formDadosPessoais!: FormGroup;
+  @Input() formDadosCNH!: FormGroup;
 
   get dPCntrl() {
     return this.formDadosPessoais.controls;
+  }
+
+  get dCnhCntrl() {
+    return this.formDadosCNH.controls;
   }
 
   // Lista para o select de estado civil
@@ -31,24 +36,27 @@ export class DadosPessoaisFormComponent {
 
   // Listas opções radio buttons
   opSx = [
-    { viewValue: 'Feminino', value: 'F', id: 'sx1', divId: 'div-pad' },
-    { viewValue: 'Masculino', value: 'M', id: 'sx2' }
+    { value: 'Feminino', id: 'sx1', divId: 'div-pad' },
+    { value: 'Masculino', id: 'sx2' }
   ]
 
-  opCnh = [
-    { viewValue: 'Sim', value: 'S', id: 'pcnh1', divId: 'div-pad' },
-    { viewValue: 'Não', value: 'N', id: 'pcnh2' }
-  ];
-
   // Campos CNH
-  desativarCnh = true;
-
   alterarCatCnh(){
-    if(this.dPCntrl['pCnhVal'].value === 'S'){
-      this.dPCntrl['catCnhVal'].enable()
+    if(this.dCnhCntrl['pCnhVal'].value === 'S'){
+      this.dCnhCntrl['catCnhVal'].enable()
+      this.dCnhCntrl['numCnhVal'].enable()
+      this.dCnhCntrl['dataCnhVal'].enable()
+
+      this.formDadosCNH.markAsPristine()
+      this.formDadosCNH.markAsUntouched()
     } else {
-      this.dPCntrl['catCnhVal'].disable()
-      this.dPCntrl['catCnhVal'].setValue(undefined)
+      this.dCnhCntrl['catCnhVal'].disable()
+      this.dCnhCntrl['numCnhVal'].disable()
+      this.dCnhCntrl['dataCnhVal'].disable()
+
+      this.dCnhCntrl['catCnhVal'].setValue(undefined)
+      this.dCnhCntrl['numCnhVal'].setValue(undefined)
+      this.dCnhCntrl['dataCnhVal'].setValue(undefined)
     }
   }
 

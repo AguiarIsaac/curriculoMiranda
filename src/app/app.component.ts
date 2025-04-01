@@ -15,7 +15,7 @@ import { PrimeNG } from 'primeng/config';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   providers: [
-    { provide: LOCALE_ID, useValue: 'pt-BR' } // Define pt-BR como padrão globalmente
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
 })
 export class AppComponent implements OnInit{
@@ -30,6 +30,7 @@ export class AppComponent implements OnInit{
       monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
       monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
       dateFormat: "dd/mm/yy",
+      selectionMessage: "{0} itens selecionados"
     })
   }
 
@@ -42,12 +43,20 @@ export class AppComponent implements OnInit{
       dadosPessoais: this.fb.group({
         nomeVal: ['', Validators.required],
         dataVal: ['', Validators.required],
-        ecVal: ['', Validators.required],
-        sxVal: ['F', Validators.required],
+        sxVal: ['Feminino'],
         rgVal: ['', [Validators.required, Validators.pattern('\\d{2}\\.\\d{3}\\.\\d{3}-\\d')]],
         cpfVal: ['', [Validators.required, Validators.pattern('\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}')]],
-        pCnhVal: ['S', Validators.required],
-        catCnhVal: [{value: [], disabled: false}, Validators.required]
+        ogExVal: ['', Validators.required],
+        ecVal: ['', Validators.required],
+        natuVal: [''],
+      }),
+
+      dadosCnh: this.fb.group({
+        pCnhVal: ['N', Validators.required],
+        pVeiculoVal: ['N'],
+        numCnhVal: [{value: undefined, disabled: true}, Validators.required],
+        dataCnhVal: [{value: '', disabled: true}, Validators.required],
+        catCnhVal: [{value: [], disabled: true}, Validators.required]
       }),
 
       endereco: this.fb.group({
@@ -97,6 +106,10 @@ export class AppComponent implements OnInit{
 
   get dadosPessoaisForm(): FormGroup {
     return this.form.get('dadosPessoais') as FormGroup;
+  }
+
+  get dadosCnhForm(): FormGroup {
+    return this.form.get('dadosCnh') as FormGroup;
   }
 
   get enderecoForm(): FormGroup {

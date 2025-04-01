@@ -1,93 +1,144 @@
-<form class="form-container" id="formDadosPessoais" [formGroup]="formDadosPessoais">
-    <div class="row" id="row1">
-        <!-- Input nome -->
-        <div class="input-container">
-            <label for="nome"> Nome Completo:* </label>
-            <input id="nome" type="text" pInputText formControlName="nomeVal" placeholder="Nome" autocomplete="off" pSize="large"/>
-            @if (dPCntrl['nomeVal'].invalid && dPCntrl['nomeVal'].touched) {
-                <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
-            }
-        </div>
-    </div>
+<form class="form-container" id="formDadosPessoais" [formGroup]="formDadosPessoais" style="padding-bottom: 0.5rem;">
+  <div class="title-container">
+    <h2> Informações Pessoais </h2>
+  </div>
 
-    <div class="row" id="row2">
-        <!-- Input data -->
-        <div class="input-container">
-            <label for="dataNascimento"> Data de Nascimento:* </label>
-            <p-datepicker id="dataNascimento" [iconDisplay]="'input'" [showIcon]="true" formControlName="dataVal" dateFormat="dd/mm/yy" placeholder="DD/MM/YYYY" fluid size="large"/>
-            @if (dPCntrl['dataVal'].invalid && dPCntrl['dataVal'].touched) {
-                <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
-            }
-        </div>
+  <div class="row">
+      <!-- Input nome -->
+      <div class="input-container">
+          <label for="nome"> Nome Completo:* </label>
+          <input id="nome" type="text" pInputText formControlName="nomeVal" placeholder="Nome" autocomplete="off" pSize="large"/>
+          @if (dPCntrl['nomeVal'].invalid && dPCntrl['nomeVal'].touched) {
+              <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
+          }
+      </div>
 
-        <!-- Input estado civil -->
-        <div class="input-container">
-            <label for="estadoCivil"> Estado Civil:* </label>
-            <p-select id="estadoCivil" formControlName="ecVal" [options]="estadoCivil" placeholder="Selecione" fluid size="large"/>
-            @if (dPCntrl['ecVal'].invalid && dPCntrl['ecVal'].touched) {
-                <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
-            }
-        </div>
+      <!-- Input data -->
+      <div class="input-container">
+        <label for="dataNascimento"> Data de Nascimento:* </label>
+        <p-datepicker id="dataNascimento" [iconDisplay]="'input'" [showIcon]="true" formControlName="dataVal" placeholder="DD/MM/YYYY" dataType="string" fluid size="large"/>
+        @if (dPCntrl['dataVal'].invalid && dPCntrl['dataVal'].touched) {
+            <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
+        }
+      </div>
 
-        <!-- Input sexo -->
-        <div class="radio-button-group">
-            <label for="sexo"> Sexo:* </label>
-            <div class="radio-button-container" id="sexo">
-              @for (op of opSx; track op) {
-                <div class="radio-button-container" [id]="op.divId">
-                    <p-radiobutton [id]="op.id"  name="sxVal" [value]="op.value" formControlName="sxVal"/>
-                    <label [for]="op.id" class="ml-2">{{ op.viewValue }}</label>
-                </div>
-              }
+      <!-- Input sexo -->
+      <div class="radio-button-group">
+        <label for="sexo"> Sexo: </label>
+        <div class="radio-button-container" id="sexo">
+          @for (op of opSx; track op) {
+            <div class="radio-button-container" [id]="op.divId">
+                <p-radiobutton [id]="op.id"  name="sxVal" [value]="op.value" formControlName="sxVal"/>
+                <label [for]="op.id" class="ml-2">{{ op.value }}</label>
             </div>
+          }
         </div>
+      </div>
+
+  </div>
+
+  <div class="row">
+    <!-- Input rg -->
+    <div class="input-container">
+      <label for="rg"> RG:* </label>
+      <p-inputmask #rg id="rg" formControlName="rgVal" mask="99.999.999-9" placeholder="99.999.999-9" size="large" autoClear="false"/>
+      @if (dPCntrl['rgVal'].hasError('required') && dPCntrl['rgVal'].touched) {
+          <p-message severity="error" variant="simple" size="small">Preencha o campo antes de continuar!</p-message>
+      } @else if (dPCntrl['rgVal'].hasError('pattern') && !rg.focused) {
+          <p-message severity="error" variant="simple" size="small">Formato inválido. Use: 99.999.999-9</p-message>
+      }
     </div>
 
-    <div class="row" id="row3">
-        <!-- Input rg -->
-        <div class="input-container">
-            <label for="rg"> RG:* </label>
-            <p-inputmask #rg id="rg" formControlName="rgVal" mask="99.999.999-9" placeholder="99.999.999-9" size="large" autoClear="false"/>
-            @if (dPCntrl['rgVal'].hasError('required') && dPCntrl['rgVal'].touched) {
-                <p-message severity="error" variant="simple" size="small">Preencha o campo antes de continuar!</p-message>
-            } @else if (dPCntrl['rgVal'].hasError('pattern') && !rg.focused) {
-                <p-message severity="error" variant="simple" size="small">Formato inválido. Use: 99.999.999-9</p-message>
-            }
-        </div>
-
-        <!-- Input cpf -->
-        <div class="input-container">
-            <label for="cpf"> CPF:* </label>
-            <p-inputmask #cpf id="cpf" formControlName="cpfVal" mask="999.999.999-99" placeholder="999.999.999-99" size="large" autoClear="false" />
-            @if (dPCntrl['cpfVal'].hasError('required') && dPCntrl['cpfVal'].touched) {
-                <p-message severity="error" variant="simple" size="small">Preencha o campo antes de continuar!</p-message>
-            } @else if (dPCntrl['cpfVal'].hasError('pattern') && !cpf.focused) {
-                <p-message severity="error" variant="simple" size="small">Formato inválido. Use: 999.999.999-99</p-message>
-            }
-        </div>
-
-        <!-- Input CNH? -->
-        <div class="radio-button-group">
-            <label for="pCnh"> Possui CNH?:* </label>
-            <div class="radio-button-container" id="pCnh">
-              @for (op of opCnh; track op) {
-                  <div class="radio-button-container" [id]="op.divId">
-                      <p-radiobutton [id]="op.id"  name="pCnhVal" [value]="op.value" formControlName="pCnhVal" (onClick)="alterarCatCnh()"/>
-                      <label [for]="op.id">{{ op.viewValue }}</label>
-                  </div>
-              }
-          </div>
-        </div>
-
-        <!-- Input categoria CNH -->
-        <div class="input-container">
-            <label for="catCnh"> Categoria CNH:* </label>
-            <p-multiselect id="catCnh" formControlName="catCnhVal" [options]="categoriasCnh" placeholder="Selecione" fluid size="large"/>
-            @if (dPCntrl['catCnhVal'].invalid && dPCntrl['catCnhVal'].touched) {
-                <p-message severity="error" variant="simple" size="small">Selecione uma das opções!</p-message>
-            }
-        </div>
-
+    <!-- Input cpf -->
+    <div class="input-container">
+        <label for="cpf"> CPF:* </label>
+        <p-inputmask #cpf id="cpf" formControlName="cpfVal" mask="999.999.999-99" placeholder="999.999.999-99" size="large" autoClear="false" />
+        @if (dPCntrl['cpfVal'].hasError('required') && dPCntrl['cpfVal'].touched) {
+            <p-message severity="error" variant="simple" size="small">Preencha o campo antes de continuar!</p-message>
+        } @else if (dPCntrl['cpfVal'].hasError('pattern') && !cpf.focused) {
+            <p-message severity="error" variant="simple" size="small">Formato inválido. Use: 999.999.999-99</p-message>
+        }
     </div>
+
+    <!-- Input orgão expedidor -->
+    <div class="input-container">
+      <label for="ogExpedidor"> Orgão Expedidor:* </label>
+      <input id="ogExpedidor" type="text" pInputText formControlName="ogExVal" autocomplete="off" pSize="large"/>
+      @if (dPCntrl['ogExVal'].invalid && dPCntrl['ogExVal'].touched) {
+        <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
+      }
+    </div>
+
+  </div>
+
+  <div class="row">
+    <!-- Input estado civil -->
+    <div class="input-container">
+      <label for="estadoCivil"> Estado Civil:* </label>
+      <p-select id="estadoCivil" formControlName="ecVal" [options]="estadoCivil" placeholder="Selecione" fluid size="large"/>
+      @if (dPCntrl['ecVal'].invalid && dPCntrl['ecVal'].touched) {
+          <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
+      }
+    </div>
+
+    <!-- Input naturalidade -->
+    <div class="input-container">
+      <label for="naturalidade"> Naturalidade: </label>
+      <input id="naturalidade" type="text" pInputText formControlName="natuVal" autocomplete="off" pSize="large"/>
+    </div>
+
+  </div>
+
+</form>
+
+<form class="form-container" id="formDadosCnh" [formGroup]="formDadosCNH">
+  <div class="title-container">
+    <h2> Dados CNH </h2>
+  </div>
+
+  <div class="checkbox-row">
+    <!-- Checkbox CNH? -->
+    <div class="checkbox-container">
+      <label class="checkbox-label" for="pCnh" > Possui CNH?* </label>
+      <p-checkbox id="pCnh" formControlName="pCnhVal" binary="true" trueValue="S" falseValue="N" (onChange)="alterarCatCnh()" size="large"/>
+    </div>
+
+    <!-- Checkbox veículo próprio? -->
+    <div class="checkbox-container">
+      <label class="checkbox-label" for="dpViagem" > Possui veículo próprio? </label>
+      <p-checkbox id="dpViagem" formControlName="pVeiculoVal" binary="true" trueValue="S" falseValue="N" size="large"/>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <!-- Input Número CNH -->
+    <div class="input-container">
+      <label for="numeroCnh"> Número da CNH:* </label>
+      <input id="numeroCnh" pInputText pKeyFilter="num" formControlName="numCnhVal" placeholder="Número" autocomplete="off" pSize="large"/>
+      @if (dCnhCntrl['numCnhVal'].invalid && dCnhCntrl['numCnhVal'].touched) {
+          <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
+      }
+    </div>
+
+    <!-- Input data CNH -->
+    <div class="input-container">
+      <label for="dataCnh"> Data de Validade:* </label>
+      <p-datepicker id="dataCnh" formControlName="dataCnhVal" [iconDisplay]="'input'" [showIcon]="true" placeholder="DD/MM/YYYY" dataType="string" fluid size="large"/>
+      @if (dCnhCntrl['dataCnhVal'].invalid && dCnhCntrl['dataCnhVal'].touched) {
+          <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
+      }
+    </div>
+
+    <!-- Input categoria CNH -->
+    <div class="input-container">
+      <label for="catCnh"> Categoria CNH:* </label>
+      <p-multiselect id="catCnh" formControlName="catCnhVal" [options]="categoriasCnh" placeholder="Selecione" fluid size="large"/>
+      @if (dCnhCntrl['catCnhVal'].invalid && dCnhCntrl['catCnhVal'].touched) {
+          <p-message severity="error" variant="simple" size="small">Selecione uma das opções!</p-message>
+      }
+    </div>
+
+  </div>
 
 </form>

@@ -17,6 +17,7 @@ import { TextareaModule } from 'primeng/textarea';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 @NgModule({
     imports: [
@@ -39,7 +40,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
         TextareaModule,
         TableModule,
         DialogModule,
-        ConfirmDialogModule
+        ConfirmDialogModule,
+        KeyFilterModule
     ],
     exports: [
         FormsModule,
@@ -61,7 +63,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
         TextareaModule,
         TableModule,
         DialogModule,
-        ConfirmDialogModule
+        ConfirmDialogModule,
+        KeyFilterModule
     ],
     providers: [ ]
 })
