@@ -23,6 +23,12 @@ export class EnderecoFormComponent {
     return this.formEndereco.controls;
   }
 
+  listaTipoEnd: string[] = [
+    "Avenida",
+    "Rua",
+    "Travessa"
+  ]
+
   estados: Estados[] = [
     { value: 'AC', viewValue: 'Acre' },
     { value: 'AL', viewValue: 'Alagoas' },

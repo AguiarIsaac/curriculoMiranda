@@ -18,17 +18,17 @@ export class InfosAdicionaisFormComponent {
     return this.formInfosAdicionais.controls;
   }
 
-  listaPtSal: string[] = [
-    "Até 500,00",
-    "Entre R$ 500,01 e  R$ 1.000,00",
-    "Entre  R$ 1.000,01 e  R$ 1.500,00",
-    "Entre  R$ 1.501,00 e  R$ 2.000,00",
-    "Entre  R$ 2.001,00 e  R$ 2.500,00",
-    "Entre  R$ 2.501,00 e  R$ 3.000,00",
-    "Entre  R$ 3.001,00 e  R$ 3.500,00",
-    "Entre  R$ 3.501,00 e  R$ 4.000,00",
-    "Entre  R$ 4.001,00 e  R$ 4.500,00",
-    "Entre  R$ 4.501,00 e  R$ 5.000,00",
-    "Entre  R$ 5.001,00 e R$ 99.999.99"
-  ]
+  listaEscolaridade: string[] = [
+    "5º Ano Completo",
+    "6º Ao 9º Ano Incompleto",
+    "Analfabeto",
+    "Até 5º Ano Incompleto",
+    "Doutorado Completo",
+    "Ensino Médio Completo",
+    "Ensino Médio Incompleto",
+    "Fundamental Completo",
+    "Mestrado Completo",
+    "Superior Completo",
+    "Superior Incompleto"
+  ];
 }

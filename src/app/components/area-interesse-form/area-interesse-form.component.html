@@ -19,13 +19,20 @@
     </div>
   </div>
 
-  <div class="row" id="row11">
+  <div class="row">
     <div class="input-container">
       <label for="cargoPretendido"> Cargo Pretendido:* </label>
       <p-select id="cargoPretendido" formControlName="cargoVal" [options]="listaCargo" placeholder="Selecione" fluid size="large" scrollHeight="20rem"/>
       @if (areaIntCntrl['cargoVal'].invalid && areaIntCntrl['cargoVal'].touched) {
         <p-message severity="error" variant="simple" size="small">Selecione antes de continuar!</p-message>
       }
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-container">
+      <label for="pretensaoSalarial"> Pretensão Salarial: </label>
+      <p-select id="pretensaoSalarial" formControlName="ptSalVal" [options]="listaPtSal" placeholder="Selecione" fluid size="large" scrollHeight="20rem"/>
     </div>
   </div>
 </form>

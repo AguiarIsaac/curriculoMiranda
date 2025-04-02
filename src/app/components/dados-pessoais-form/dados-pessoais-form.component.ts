@@ -54,9 +54,11 @@ export class DadosPessoaisFormComponent {
       this.dCnhCntrl['numCnhVal'].disable()
       this.dCnhCntrl['dataCnhVal'].disable()
 
-      this.dCnhCntrl['catCnhVal'].setValue(undefined)
-      this.dCnhCntrl['numCnhVal'].setValue(undefined)
-      this.dCnhCntrl['dataCnhVal'].setValue(undefined)
+      this.formDadosCNH.setValue({
+        catCnhVal: undefined,
+        numCnhVal: undefined,
+        dataCnhVal: undefined
+      })
     }
   }
 

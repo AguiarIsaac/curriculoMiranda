@@ -60,10 +60,11 @@ export class AppComponent implements OnInit{
       }),
 
       endereco: this.fb.group({
+        tipoEndVal: [''],
         endVal: ['', Validators.required],
         bairroVal: ['', Validators.required],
-        numVal: [undefined, Validators.required],
-        compVal: [undefined],
+        numVal: ['', Validators.required],
+        compVal: [''],
         estadoVal: ['', Validators.required],
         cidVal: ['', Validators.required],
         cepVal: ['', [Validators.required, Validators.pattern('\\d{5}\\-\\d{3}')]],
@@ -81,15 +82,16 @@ export class AppComponent implements OnInit{
       areaInteresse: this.fb.group({
         nvlHrVal: ['', Validators.required],
         areaAtVal: ['', Validators.required],
-        cargoVal: ['', Validators.required]
+        cargoVal: ['', Validators.required],
+        ptSalVal: [''],
       }),
 
       infosAdicionais: this.fb.group({
-        ptSalVal: [''],
-        dpViagemVal: [''],
-        dpMudarVal: [''],
-        pIndicacaoVal: [''],
-        pDeficienciaVal: [''],
+        grauInVal: [''],
+        dpViagemVal: ['N'],
+        dpMudarVal: ['N'],
+        pIndicacaoVal: ['N'],
+        pDeficienciaVal: ['N'],
         consideracoesVal: ['']
       }),
 
