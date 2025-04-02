@@ -1,54 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
 
-html, body {
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
 
+<<<<<<< HEAD
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
+=======
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+>>>>>>> bdb766dc4444f050cd143a5d4549deee7cfee14f
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .p-inputmask {
-    width: 100%;
+  width: 100%;
 }
 
 .p-tabs {
-    --p-tabs-tabpanel-padding: 0px;
+  --p-tabs-tabpanel-padding: 0px;
 }
 
-.p-textarea{
+.p-textarea {
   min-height: 4rem;
 }
 
 .ui-container {
-    color: rgba(0, 0, 0, 0.87);
-    width: 100%;
-    padding: 2rem 6rem;
+  color: rgba(0, 0, 0, 0.87);
+  width: 100%;
+  padding: 2rem 6rem;
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
 .form-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 2rem 0rem;
-    gap: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 2rem 0rem;
+  gap: 1.5rem;
 }
 
-.row{
-    display: flex;
-    width: 100%;
-    gap: 1rem;
+.row {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
 }
 
 .input-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
 }
 
 .button-row {
@@ -58,7 +69,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
   padding: 2rem 0rem;
 }
 
-.dialog-button-container{
+.dialog-button-container {
   display: flex;
   gap: 1rem;
   padding-top: 3rem;
@@ -88,7 +99,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
   font-size: 1.1rem;
 }
 
-.checkbox-row{
+.checkbox-row {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -96,19 +107,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
 }
 
 @media (max-width: 1350px) {
-  .checkbox-row{
+  .checkbox-row {
     gap: 1.5rem;
   }
 }
 
 
 @media (max-width: 1000px) {
-    .ui-container{
-        width: auto;
-        padding: 2rem 2rem;
-    }
+  .ui-container {
+    width: auto;
+    padding: 2rem 2rem;
+  }
 
-    .row{
-        flex-wrap: wrap;
-    }
+  .row {
+    flex-wrap: wrap;
+  }
 }
