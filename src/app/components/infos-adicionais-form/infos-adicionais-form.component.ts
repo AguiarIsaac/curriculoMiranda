@@ -3,6 +3,11 @@ import { FormGroup } from '@angular/forms';
 
 import { ImportsModule } from '../imports';
 
+interface Deficiencias {
+  value: string,
+  viewValue: string
+}
+
 @Component({
   selector: 'app-infos-adicionais-form',
   imports: [
@@ -31,4 +36,27 @@ export class InfosAdicionaisFormComponent {
     "Superior Completo",
     "Superior Incompleto"
   ];
+
+  listaDeficiencias: Deficiencias[] = [
+    {value: "AUD", viewValue: "Deficiência Auditiva"},
+    {value: "INT", viewValue: "Deficiência Intelectual"},
+    {value: "VIS", viewValue: "Deficiência Visual"},
+    {value: "FIS", viewValue: "Deficiência Fisica"},
+    {value: "FAL", viewValue: "Deficiência na Fala"},
+    {value: "OUT", viewValue: "Outros"}
+  ]
+
+  alterarDeficiencias(){
+    if(this.infoAdCntrl['pDeficienciaVal'].value === 'S'){
+      this.infoAdCntrl['deficienciasVal'].enable()
+
+      this.infoAdCntrl['deficienciasVal'].markAsPristine()
+      this.infoAdCntrl['deficienciasVal'].markAsUntouched()
+    } else {
+      this.infoAdCntrl['deficienciasVal'].disable()
+
+      this.infoAdCntrl['deficienciasVal'].setValue(undefined)
+    }
+  }
+
 }

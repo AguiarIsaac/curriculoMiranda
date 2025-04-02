@@ -4,7 +4,7 @@
   <p-dialog #dialog header="Experiência Profissional" [modal]="true" [(visible)]="visible" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="true">
 
     <!-- Inputs -->
-    <div class="dialog-input-container" id="row17">
+    <div class="dialog-input-container">
 
       <!-- Input Nome Empresa -->
       <div class="input-container">
@@ -18,7 +18,7 @@
       <!-- Select Tipo Empresa -->
       <div class="input-container">
         <label for="tipEmp"> Tipo de Empresa:* </label>
-        <p-select id="tipEmp" formControlName="tipEmpVal" [options]="listaTipEmp" placeholder="Selecione" fluid size="large"/>
+        <p-select inputId="tipEmp" formControlName="tipEmpVal" [options]="listaTipEmp" placeholder="Selecione" fluid size="large"/>
         @if (expProCntrl['tipEmpVal'].invalid && expProCntrl['tipEmpVal'].touched) {
             <p-message severity="error" variant="simple" size="small">Selecione antes de continuar!</p-message>
         }
@@ -48,7 +48,7 @@
       <!-- Input Data Admissão -->
       <div class="input-container">
         <label for="dataAdmissao"> Data de Admissão:* </label>
-        <p-datepicker id="dataAdmissao" [iconDisplay]="'input'" [showIcon]="true" formControlName="dtAdmVal" placeholder="DD/MM/YYYY" fluid size="large" dataType="string" [appendTo]="dialog"/>
+        <p-datepicker inputId="dataAdmissao" [iconDisplay]="'input'" [showIcon]="true" formControlName="dtAdmVal" placeholder="DD/MM/YYYY" fluid size="large" dataType="string" [appendTo]="dialog"/>
         @if (expProCntrl['dtAdmVal'].invalid && expProCntrl['dtAdmVal'].touched) {
             <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
         }
@@ -57,7 +57,7 @@
       <!-- Input Data Demissão -->
       <div class="input-container">
         <label for="dataDemissao"> Data de Demissão: </label>
-        <p-datepicker id="dataDemissao" [iconDisplay]="'input'" [showIcon]="true" formControlName="dtDmsVal" placeholder="DD/MM/YYYY" fluid size="large" dataType="string" [appendTo]="dialog"/>
+        <p-datepicker inputId="dataDemissao" [iconDisplay]="'input'" [showIcon]="true" formControlName="dtDmsVal" placeholder="DD/MM/YYYY" fluid size="large" dataType="string" [appendTo]="dialog"/>
       </div>
 
       <!-- Input Último Cargo -->
@@ -72,7 +72,7 @@
       <!-- Input Último Salário -->
       <div class="input-container">
         <label for="ultSalario"> Último Salário:* </label>
-        <input id="ultSalario" type="text" pInputText formControlName="ultSalVal" autocomplete="off" pSize="large"/>
+        <p-inputnumber inputId="ultSalario" formControlName="ultSalVal" mode="currency" currency="BRL" [minFractionDigits]="2" size="large" />
         @if (expProCntrl['ultSalVal'].invalid && expProCntrl['ultSalVal'].touched) {
           <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
         }
@@ -81,7 +81,7 @@
       <!-- Input Resumo Atividades -->
       <div class="input-container">
         <label for="resumoAtvd"> Resumo das Atividades:* </label>
-        <textarea id="resumoAtvd" pTextarea rows="2" cols="30" formControlName="resAtvVal" autoResize="true" fluid pSize="large"></textarea>
+        <textarea inputId="resumoAtvd" pTextarea rows="2" cols="30" formControlName="resAtvVal" autoResize="true" fluid pSize="large"></textarea>
       </div>
 
     </div>
@@ -101,7 +101,6 @@
       <ng-template #header>
           <tr>
               <th pResizableColumn>Nome Empresa:</th>
-              <th pResizableColumn>Tipo Empresa:</th>
               <th pResizableColumn>Data Admissão:</th>
               <th pResizableColumn>Último Cargo:</th>
               <th pResizableColumn>Último Salário:</th>
@@ -112,10 +111,9 @@
       <ng-template #body let-exPro>
           <tr>
               <td>{{ exPro.nomeEmpVal }}</td>
-              <td>{{ exPro.tipEmpVal }}</td>
               <td>{{ exPro.dtAdmVal }}</td>
               <td>{{ exPro.ultCargoVal }}</td>
-              <td>{{ exPro.ultSalVal }}</td>
+              <td>R${{ exPro.ultSalVal }}</td>
               <td>{{ exPro.resAtvVal }}</td>
               <td class="table-button-container">
                 <p-button icon="pi pi-pencil" (click)="editarExpProfissional(exPro, experienciaPro.indexOf(exPro))" severity="secondary" rounded />
@@ -125,11 +123,11 @@
       </ng-template>
     </p-table>
 
-    <div class="button-row" id="row16">
+    <div class="button-row">
       <p-button (click)="showDialog()" label="+ Adicionar" size="large"/>
     </div>
   } @else {
-    <div class="button-row" style="justify-content: center;" id="row16">
+    <div class="button-row" style="justify-content: center;">
       <p-button (click)="showDialog()" label="Adicionar Experiência Profissional" size="large" severity="primary"/>
     </div>
   }

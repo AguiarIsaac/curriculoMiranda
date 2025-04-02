@@ -4,30 +4,49 @@
 
     <div class="input-container">
       <label for="grauInstrucao"> Grau de Instrução: </label>
-      <p-select id="grauInstrucao" formControlName="grauInVal" [options]="listaEscolaridade" placeholder="Selecione" fluid size="large" scrollHeight="20rem"/>
+      <p-select inputId="grauInstrucao" formControlName="grauInVal" [options]="listaEscolaridade" placeholder="Selecione" fluid size="large" scrollHeight="20rem"/>
     </div>
 
   </div>
 
   <div class="checkbox-row">
     <div class="checkbox-container">
-      <label class="checkbox-label" for="dpViagem" > Disponibilidade para viagem: </label>
-      <p-checkbox id="dpViagem" formControlName="dpViagemVal" binary="true" trueValue="S" falseValue="N" size="large"/>
+      <label for="dpViagem" > Disponibilidade para viagem: </label>
+      <p-checkbox inputId="dpViagem" formControlName="dpViagemVal" binary="true" trueValue="S" falseValue="N" size="large"/>
     </div>
 
     <div class="checkbox-container">
-      <label class="checkbox-label" for="dpMudarCid"> Disponibilidade para mudar de cidade: </label>
-      <p-checkbox id="dpMudarCid" formControlName="dpMudarVal" binary="true" trueValue="S" falseValue="N" size="large"/>
+      <label for="dpMudarCid"> Disponibilidade para mudar de cidade: </label>
+      <p-checkbox inputId="dpMudarCid" formControlName="dpMudarVal" binary="true" trueValue="S" falseValue="N" size="large"/>
     </div>
 
     <div class="checkbox-container">
-      <label class="checkbox-label" for="pIndicacao"> Recebeu indicação? </label>
-      <p-checkbox id="pIndicacao" formControlName="pIndicacaoVal" binary="true" trueValue="S" falseValue="N" size="large"/>
+      <label for="pIndicacao"> Recebeu indicação? </label>
+      <p-checkbox inputId="pIndicacao" formControlName="pIndicacaoVal" binary="true" trueValue="S" falseValue="N" size="large"/>
     </div>
 
     <div class="checkbox-container">
-      <label class="checkbox-label" for="pDeficiencia"> Possui Deficiência? </label>
-      <p-checkbox id="pDeficiencia" formControlName="pDeficienciaVal" binary="true" trueValue="S" falseValue="N" size="large"/>
+      <label for="pDeficiencia"> Possui Deficiência? </label>
+      <p-checkbox inputId="pDeficiencia" formControlName="pDeficienciaVal" (onChange)="alterarDeficiencias()" binary="true" trueValue="S" falseValue="N" size="large"/>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <!-- Input Deficiências -->
+    <div class="input-container">
+      <label for="dificiencias"> Tipo de Deficiência:* </label>
+      <p-multiselect inputId="dificiencias" formControlName="deficienciasVal" [options]="listaDeficiencias" optionLabel="viewValue" optionValue="value" placeholder="Selecione" fluid size="large"/>
+      @if (infoAdCntrl['deficienciasVal'].invalid && infoAdCntrl['deficienciasVal'].touched) {
+          <p-message severity="error" variant="simple" size="small">Selecione uma das opções!</p-message>
+      }
+    </div>
+
+    <!-- Input Outras Deficiências -->
+    <!-- Parei aqui -->
+    <div class="input-container">
+      <label for="outDeficiencias"> Outras Deficiências: </label>
+      <input id="outDeficiencias" type="text" pInputText placeholder="Nome" autocomplete="off" pSize="large"/>
     </div>
 
   </div>
@@ -35,7 +54,7 @@
   <div class="row">
     <div class="input-container">
       <label for="consideracoes"> Considerações: </label>
-      <textarea id="consideracoes" pTextarea rows="2" cols="30" formControlName="consideracoesVal" autoResize="true" fluid pSize="large"></textarea>
+      <textarea inputId="consideracoes" pTextarea rows="2" cols="30" formControlName="consideracoesVal" autoResize="true" fluid pSize="large"></textarea>
     </div>
   </div>
 

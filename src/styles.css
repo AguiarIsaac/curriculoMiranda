@@ -4,17 +4,14 @@
 html,
 body {
   height: 100%;
+  font-size: 16px;
 }
 
-<<<<<<< HEAD
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
-=======
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
->>>>>>> bdb766dc4444f050cd143a5d4549deee7cfee14f
 * {
   margin: 0;
   padding: 0;
@@ -25,8 +22,13 @@ body {
   width: 100%;
 }
 
-.p-tabs {
-  --p-tabs-tabpanel-padding: 0px;
+.p-tabpanels {
+  --p-tabs-tabpanel-padding: 0rem 1rem 1rem 1rem;
+  border-radius: 0px 0px 12px 12px;
+}
+
+.p-tablist {
+  border-radius: 12px 12px 0px 0px;
 }
 
 .p-textarea {
@@ -34,7 +36,6 @@ body {
 }
 
 .ui-container {
-  color: rgba(0, 0, 0, 0.87);
   width: 100%;
   padding: 2rem 6rem;
   max-width: 1024px;
@@ -45,7 +46,7 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 2rem 0rem;
+  padding-top: 2rem;
   gap: 1.5rem;
 }
 
@@ -95,21 +96,11 @@ body {
   padding: 1rem 0rem;
 }
 
-.checkbox-label {
-  font-size: 1.1rem;
-}
-
 .checkbox-row {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  gap: 4rem;
-}
-
-@media (max-width: 1350px) {
-  .checkbox-row {
-    gap: 1.5rem;
-  }
+  gap: 1.5rem;
 }
 
 

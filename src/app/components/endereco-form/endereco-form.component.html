@@ -1,5 +1,5 @@
 <form class="form-container" id="formEndereco" [formGroup]="formEndereco">
-    <div class="row" id="row4">
+    <div class="row">
 
         <!-- Select Tipo Endereço -->
         <div class="input-container">
@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <div class="row" id="row5">
+    <div class="row">
         <!-- Input Bairro -->
         <div class="input-container">
             <label for="bairro"> Bairro:* </label>
@@ -44,11 +44,11 @@
         </div>
     </div>
 
-    <div class="row" id="row6">
+    <div class="row">
         <!-- Input Estado -->
         <div class="input-container">
             <label for="estado"> Estado:* </label>
-            <p-select id="estado" formControlName="estadoVal" [options]="estados"  optionLabel="viewValue" optionValue="value" placeholder="Selecione" fluid size="large"/>
+            <p-select inputId="estado" formControlName="estadoVal" [options]="estados"  optionLabel="viewValue" optionValue="value" placeholder="Selecione" fluid size="large"/>
             @if (endCntrl['estadoVal'].invalid && endCntrl['estadoVal'].touched) {
                 <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
             }
@@ -66,7 +66,7 @@
         <!-- Input CEP -->
         <div class="input-container">
             <label for="cep"> CEP:* </label>
-            <p-inputmask #cep id="cep" formControlName="cepVal" mask="99999-999" placeholder="CEP" size="large" autoClear="false" />
+            <p-inputmask #cep inputId="cep" formControlName="cepVal" mask="99999-999" placeholder="CEP" size="large" autoClear="false" />
             @if (endCntrl['cepVal'].hasError('required') && endCntrl['cepVal'].touched) {
                 <p-message severity="error" variant="simple" size="small">Preencha o campo antes de continuar!</p-message>
             } @else if (endCntrl['cepVal'].hasError('pattern') && !cep.focused) {
