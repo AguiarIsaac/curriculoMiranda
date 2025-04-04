@@ -59,4 +59,18 @@ export class InfosAdicionaisFormComponent {
     }
   }
 
+  outraDeficiencia(){
+    let listaD: string[] = this.infoAdCntrl['deficienciasVal'].value
+
+    if(listaD.some(v => v === "OUT")) {
+      this.infoAdCntrl['otDeficienciasVal'].enable()
+    } else {
+      this.infoAdCntrl['otDeficienciasVal'].disable()
+
+      this.infoAdCntrl['otDeficienciasVal'].setValue(undefined)
+    }
+
+
+  }
+
 }

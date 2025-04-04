@@ -93,6 +93,8 @@ export class AppComponent implements OnInit{
         pIndicacaoVal: ['N'],
         pDeficienciaVal: ['N'],
         deficienciasVal: [{value: [], disabled: true}, Validators.required],
+        otDeficienciasVal: [{value: '', disabled: true}],
+        nesAjudaVal: ['N'],
         consideracoesVal: ['']
       }),
 
