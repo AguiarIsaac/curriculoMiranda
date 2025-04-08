@@ -17,8 +17,11 @@
 
       <!-- Input Desc/Curso -->
       <div class="input-container">
-        <label for="descricaoCurso"> Descrição/Curso: </label>
+        <label for="descricaoCurso"> Descrição/Curso:* </label>
         <input id="descricaoCurso" type="text" pInputText formControlName="descCursoVal" autocomplete="off" pSize="large"/>
+        @if (diaFormCntrl['descCursoVal'].invalid && diaFormCntrl['descCursoVal'].touched) {
+          <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
+        }
       </div>
 
         <!-- Input Iniciado Em -->
@@ -82,7 +85,7 @@
               <td>{{ formacao.iniVal }}</td>
               <td>{{ formacao.qtHrsVal }}h</td>
               <td>{{ formacao.instituicaoVal }}</td>
-              <td class="table-button-container">
+              <td>
                 <p-button icon="pi pi-pencil" (click)="editarFormacao(formacao, formacoes.indexOf(formacao))" severity="secondary" rounded />
                 <p-button icon="pi pi-trash" (click)="confirm($event, formacao, formacoes.indexOf(formacao))" severity="contrast" rounded />
               </td>

@@ -46,20 +46,28 @@ export class InfosAdicionaisFormComponent {
     {value: "OUT", viewValue: "Outros"}
   ]
 
+  habilitarCheck: boolean = false
+
   alterarDeficiencias(){
     if(this.infoAdCntrl['pDeficienciaVal'].value === 'S'){
       this.infoAdCntrl['deficienciasVal'].enable()
+      this.habilitarCheck = true
 
       this.infoAdCntrl['deficienciasVal'].markAsPristine()
       this.infoAdCntrl['deficienciasVal'].markAsUntouched()
+
+
     } else {
       this.infoAdCntrl['deficienciasVal'].disable()
+      this.habilitarCheck = false
 
       this.infoAdCntrl['deficienciasVal'].setValue(undefined)
+      this.infoAdCntrl['nesAjudaVal'].setValue('N')
+      this.infoAdCntrl['aparelhoAudVal'].setValue('N')
     }
   }
 
-  outraDeficiencia(){
+  checkDeficiencia(){
     let listaD: string[] = this.infoAdCntrl['deficienciasVal'].value
 
     if(listaD.some(v => v === "OUT")) {
@@ -69,7 +77,6 @@ export class InfosAdicionaisFormComponent {
 
       this.infoAdCntrl['otDeficienciasVal'].setValue(undefined)
     }
-
 
   }
 

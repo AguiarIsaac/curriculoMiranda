@@ -5,16 +5,23 @@ import { ImportsModule } from '../imports';
 import { ConfirmationService } from 'primeng/api';
 
 interface ExpProfissional {
+  empAtualVal: string,
   nomeEmpVal: string,
   tipEmpVal: string,
-  endEmpVal: string,
-  emailEmpVal: string,
-  telEmpVal: string,
   dtAdmVal: string,
   dtDmsVal: string,
   ultCargoVal: string,
   ultSalVal: number,
-  resAtvVal: string
+  resAtvVal: string,
+
+  endEmpVal: string,
+  estadoEmpVal: string,
+  cidEmpVal: string,
+  bairroEmpVal: string
+  cepEmpVal: string,
+
+  emailEmpVal: string,
+  telEmpVal: string
 }
 
 @Component({
@@ -31,11 +38,11 @@ export class ExperienciaProfissionalFormComponent {
   dialogFormExpPro!: FormGroup;
 
   experienciaPro: ExpProfissional[] = [
-    {nomeEmpVal: 'Teste1', tipEmpVal: 'Privada', endEmpVal: '', emailEmpVal: 'email@email.com', telEmpVal: '', dtAdmVal: '01/01/2020', dtDmsVal: '01/01/2025', ultCargoVal: 'teste', ultSalVal: 1200, resAtvVal: 'Teste'},
-    {nomeEmpVal: 'Teste2', tipEmpVal: 'Privada', endEmpVal: '', emailEmpVal: 'email@email.com', telEmpVal: '', dtAdmVal: '01/01/2020', dtDmsVal: '01/01/2025', ultCargoVal: 'teste', ultSalVal: 1200, resAtvVal: 'Teste'},
-    {nomeEmpVal: 'Teste3', tipEmpVal: 'Privada', endEmpVal: '', emailEmpVal: 'email@email.com', telEmpVal: '', dtAdmVal: '01/01/2020', dtDmsVal: '01/01/2025', ultCargoVal: 'teste', ultSalVal: 1200, resAtvVal: 'Teste'},
-    {nomeEmpVal: 'Teste4', tipEmpVal: 'Privada', endEmpVal: '', emailEmpVal: 'email@email.com', telEmpVal: '', dtAdmVal: '01/01/2020', dtDmsVal: '01/01/2025', ultCargoVal: 'teste', ultSalVal: 1200, resAtvVal: 'Teste'},
-    {nomeEmpVal: 'Teste5', tipEmpVal: 'Privada', endEmpVal: '', emailEmpVal: 'email@email.com', telEmpVal: '', dtAdmVal: '01/01/2020', dtDmsVal: '01/01/2025', ultCargoVal: 'teste', ultSalVal: 1200, resAtvVal: 'Teste'}
+    { empAtualVal: 'S', nomeEmpVal: 'Empresa Teste LTDA', tipEmpVal: 'Privada', dtAdmVal: '01/03/2018', dtDmsVal: '15/02/2024', ultCargoVal: 'Analista de Sistemas', ultSalVal: 3500, resAtvVal: 'Responsável pelo desenvolvimento e manutenção de sistemas web.', endEmpVal: 'Rua das Acácias, 123', estadoEmpVal: 'SP', cidEmpVal: 'São Paulo', bairroEmpVal: 'Centro', cepEmpVal: '01001-000', emailEmpVal: 'contato@empresateste.com', telEmpVal: '(11) 98765-4321' },
+    { empAtualVal: 'N', nomeEmpVal: 'Construtora Modelo', tipEmpVal: 'Pública', dtAdmVal: '10/05/2015', dtDmsVal: '22/08/2020', ultCargoVal: 'Engenheiro Civil', ultSalVal: 7200, resAtvVal: 'Supervisão de obras e coordenação de equipes.', endEmpVal: 'Av. Brasil, 5000', estadoEmpVal: 'RJ', cidEmpVal: 'Rio de Janeiro', bairroEmpVal: 'Copacabana', cepEmpVal: '22050-002', emailEmpVal: 'rh@construtoramodelo.gov.br', telEmpVal: '(21) 98888-1234' },
+    { empAtualVal: 'N', nomeEmpVal: 'Comércio Boa Compra', tipEmpVal: 'Privada', dtAdmVal: '01/01/2012', dtDmsVal: '30/06/2017', ultCargoVal: 'Vendedor', ultSalVal: 1800, resAtvVal: 'Atendimento ao cliente e organização de estoque.', endEmpVal: 'Rua das Laranjeiras, 89', estadoEmpVal: 'MG', cidEmpVal: 'Belo Horizonte', bairroEmpVal: 'Savassi', cepEmpVal: '30130-150', emailEmpVal: 'contato@boacompra.com.br', telEmpVal: '(31) 99876-5432' },
+    { empAtualVal: 'S', nomeEmpVal: 'Tech Global', tipEmpVal: 'Multinacional', dtAdmVal: '15/09/2020', dtDmsVal: '08/04/2025', ultCargoVal: 'Desenvolvedor Full Stack', ultSalVal: 8500, resAtvVal: 'Desenvolvimento de aplicações web e mobile.', endEmpVal: 'Av. Paulista, 1000', estadoEmpVal: 'SP', cidEmpVal: 'São Paulo', bairroEmpVal: 'Bela Vista', cepEmpVal: '01310-100', emailEmpVal: 'jobs@techglobal.com', telEmpVal: '(11) 91234-5678' },
+    { empAtualVal: 'N', nomeEmpVal: 'Serviços Rápidos ME', tipEmpVal: 'MEI', dtAdmVal: '20/02/2010', dtDmsVal: '10/10/2014', ultCargoVal: 'Auxiliar Administrativo', ultSalVal: 1500, resAtvVal: 'Organização de documentos e atendimento telefônico.', endEmpVal: 'Rua Flor de Lis, 45', estadoEmpVal: 'RS', cidEmpVal: 'Porto Alegre', bairroEmpVal: 'Moinhos de Vento', cepEmpVal: '90570-120', emailEmpVal: 'admin@servrapidos.com', telEmpVal: '(51) 99999-9999' }
   ]
 
   visible: boolean = false;
@@ -43,16 +50,23 @@ export class ExperienciaProfissionalFormComponent {
 
   constructor(private fb: FormBuilder, private confirmationService: ConfirmationService) {
     this.dialogFormExpPro = this.fb.group({
+        empAtualVal: ['N'],
         nomeEmpVal: ['', Validators.required],
         tipEmpVal: ['', Validators.required],
-        endEmpVal: [''],
-        emailEmpVal: ['', Validators.email],
-        telEmpVal: [''],
         dtAdmVal: ['', Validators.required],
         dtDmsVal: [''],
         ultCargoVal: ['', Validators.required],
         ultSalVal: ['', Validators.required],
-        resAtvVal: ['', Validators.required]
+        resAtvVal: ['', Validators.required],
+
+        endEmpVal: [''],
+        estadoEmpVal: [''],
+        cidEmpVal: ['', Validators.required],
+        bairroEmpVal: [''],
+        cepEmpVal: ['', Validators.pattern('\\d{5}\\-\\d{3}')],
+
+        emailEmpVal: ['', Validators.email],
+        telEmpVal: [''],
     })
   }
 
@@ -62,16 +76,23 @@ export class ExperienciaProfissionalFormComponent {
 
   showDialog() {
       this.dialogFormExpPro.setValue({
+        empAtualVal: 'N',
         nomeEmpVal: '',
         tipEmpVal: '',
-        endEmpVal: '',
-        emailEmpVal: '',
-        telEmpVal: '',
         dtAdmVal: '',
         dtDmsVal: '',
         ultCargoVal: '',
         ultSalVal: null,
-        resAtvVal: ''
+        resAtvVal: '',
+
+        endEmpVal: '',
+        estadoEmpVal: '',
+        cidEmpVal: '',
+        bairroEmpVal: '',
+        cepEmpVal: '',
+
+        emailEmpVal: '',
+        telEmpVal: '',
       })
       this.dialogFormExpPro.markAsPristine()
       this.dialogFormExpPro.markAsUntouched()
@@ -85,16 +106,24 @@ export class ExperienciaProfissionalFormComponent {
     this.indexSelecionado = index
 
     this.dialogFormExpPro.setValue({
+      empAtualVal: exPro.empAtualVal,
       nomeEmpVal: exPro.nomeEmpVal,
       tipEmpVal: exPro.tipEmpVal,
-      endEmpVal: exPro.endEmpVal,
-      emailEmpVal: exPro.emailEmpVal,
-      telEmpVal: exPro.telEmpVal,
       dtAdmVal: exPro.dtAdmVal,
       dtDmsVal: exPro.dtDmsVal,
       ultCargoVal: exPro.ultCargoVal,
       ultSalVal: exPro.ultSalVal,
-      resAtvVal: exPro.resAtvVal
+      resAtvVal: exPro.resAtvVal,
+
+      endEmpVal: exPro.endEmpVal,
+      estadoEmpVal: exPro.estadoEmpVal,
+      cidEmpVal: exPro.cidEmpVal,
+      bairroEmpVal: exPro.bairroEmpVal,
+      cepEmpVal: exPro.cepEmpVal,
+
+      emailEmpVal: exPro.emailEmpVal,
+      telEmpVal: exPro.telEmpVal
+
     })
 
     this.visible = true

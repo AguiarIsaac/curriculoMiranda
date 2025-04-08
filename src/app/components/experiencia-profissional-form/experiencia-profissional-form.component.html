@@ -5,6 +5,13 @@
 
     <!-- Inputs -->
     <div class="dialog-input-container">
+      <!-- Check Emprego Atual -->
+      <div>
+        <div class="checkbox-container">
+          <label for="empregoAtual" > Emprego Atual? </label>
+          <p-checkbox inputId="empregoAtual" formControlName="empAtualVal" binary="true" trueValue="S" falseValue="N" size="large"/>
+        </div>
+      </div>
 
       <!-- Input Nome Empresa -->
       <div class="input-container">
@@ -24,40 +31,21 @@
         }
       </div>
 
-      <!-- Input Endereço -->
-      <div class="input-container">
-        <label for="enderecoEmp"> Endereço (Empresa): </label>
-        <input id="enderecoEmp" type="text" pInputText formControlName="endEmpVal" autocomplete="off" pSize="large"/>
-      </div>
+      <div class="row">
+        <!-- Input Data Admissão -->
+        <div class="input-container">
+          <label for="dataAdmissao"> Data de Admissão:* </label>
+          <p-datepicker inputId="dataAdmissao" [iconDisplay]="'input'" [showIcon]="true" formControlName="dtAdmVal" placeholder="DD/MM/YYYY" fluid size="large" dataType="string" [appendTo]="dialog"/>
+          @if (expProCntrl['dtAdmVal'].invalid && expProCntrl['dtAdmVal'].touched) {
+              <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
+          }
+        </div>
 
-      <!-- Input E-mail -->
-      <div class="input-container">
-        <label for="emailEmp"> E-mail: </label>
-        <input id="emailEmp" type="text" pInputText formControlName="emailEmpVal" pSize="large"/>
-        @if (expProCntrl['emailEmpVal'].invalid && expProCntrl['emailEmpVal'].touched) {
-          <p-message severity="error" variant="simple" size="small">E-mail inválido.</p-message>
-        }
-      </div>
-
-      <!-- Input Telefone -->
-      <div class="input-container">
-        <label for="telefoneEmp"> Telefone (Empresa): </label>
-        <input id="telefoneEmp" type="text" pInputText formControlName="telEmpVal" autocomplete="off" pSize="large"/>
-      </div>
-
-      <!-- Input Data Admissão -->
-      <div class="input-container">
-        <label for="dataAdmissao"> Data de Admissão:* </label>
-        <p-datepicker inputId="dataAdmissao" [iconDisplay]="'input'" [showIcon]="true" formControlName="dtAdmVal" placeholder="DD/MM/YYYY" fluid size="large" dataType="string" [appendTo]="dialog"/>
-        @if (expProCntrl['dtAdmVal'].invalid && expProCntrl['dtAdmVal'].touched) {
-            <p-message severity="error" variant="simple" size="small">O campo é obrigatório!</p-message>
-        }
-      </div>
-
-      <!-- Input Data Demissão -->
-      <div class="input-container">
-        <label for="dataDemissao"> Data de Demissão: </label>
-        <p-datepicker inputId="dataDemissao" [iconDisplay]="'input'" [showIcon]="true" formControlName="dtDmsVal" placeholder="DD/MM/YYYY" fluid size="large" dataType="string" [appendTo]="dialog"/>
+        <!-- Input Data Demissão -->
+        <div class="input-container">
+          <label for="dataDemissao"> Data de Demissão: </label>
+          <p-datepicker inputId="dataDemissao" [iconDisplay]="'input'" [showIcon]="true" formControlName="dtDmsVal" placeholder="DD/MM/YYYY" fluid size="large" dataType="string" [appendTo]="dialog"/>
+        </div>
       </div>
 
       <!-- Input Último Cargo -->
@@ -80,8 +68,67 @@
 
       <!-- Input Resumo Atividades -->
       <div class="input-container">
-        <label for="resumoAtvd"> Resumo das Atividades:* </label>
+        <label for="resumoAtvd"> Resumo das Atividades Realizadas:* </label>
         <textarea inputId="resumoAtvd" pTextarea rows="2" cols="30" formControlName="resAtvVal" autoResize="true" fluid pSize="large"></textarea>
+      </div>
+
+      <div class="title-container">
+        <h3> Informações de Endereço (Empresa) </h3>
+      </div>
+
+      <!-- Input Endereço -->
+      <div class="input-container">
+        <label for="enderecoEmp"> Endereço: </label>
+        <input id="enderecoEmp" type="text" pInputText placeholder="Endereço" formControlName="endEmpVal" autocomplete="off" pSize="large"/>
+      </div>
+
+      <div class="row">
+        <!-- Input Estado -->
+        <div class="input-container">
+          <label for="estado"> Estado: </label>
+          <p-select inputId="estado" formControlName="estadoEmpVal" [options]=""  optionLabel="viewValue" optionValue="value" placeholder="Selecione" fluid size="large"/>
+        </div>
+
+        <!-- Input Cidade -->
+        <div class="input-container">
+          <label for="cidade"> Cidade:* </label>
+          <input id="cidade" type="text" pInputText formControlName="cidEmpVal" placeholder="Cidade" pSize="large"/>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <!-- Input Bairro -->
+        <div class="input-container">
+          <label for="bairro"> Bairro: </label>
+          <input id="bairro" type="text" pInputText formControlName="bairroEmpVal" placeholder="Bairro" pSize="large"/>
+        </div>
+
+        <!-- Input CEP -->
+        <div class="input-container">
+          <label for="cep"> CEP: </label>
+          <p-inputmask #cep inputId="cep" formControlName="cepEmpVal" mask="99999-999" placeholder="CEP" size="large" autoClear="false" />
+        </div>
+
+      </div>
+
+      <div class="title-container">
+        <h3> Informações de Contato (Empresa) </h3>
+      </div>
+
+      <!-- Input E-mail -->
+      <div class="input-container">
+        <label for="emailEmp"> E-mail: </label>
+        <input id="emailEmp" type="text" pInputText formControlName="emailEmpVal" pSize="large"/>
+        @if (expProCntrl['emailEmpVal'].invalid && expProCntrl['emailEmpVal'].touched) {
+          <p-message severity="error" variant="simple" size="small">E-mail inválido.</p-message>
+        }
+      </div>
+
+      <!-- Input Telefone -->
+      <div class="input-container">
+        <label for="telefoneEmp"> Telefone: </label>
+        <input id="telefoneEmp" type="text" pInputText formControlName="telEmpVal" autocomplete="off" pSize="large"/>
       </div>
 
     </div>
@@ -115,7 +162,7 @@
               <td>{{ exPro.ultCargoVal }}</td>
               <td>R${{ exPro.ultSalVal }}</td>
               <td>{{ exPro.resAtvVal }}</td>
-              <td class="table-button-container">
+              <td>
                 <p-button icon="pi pi-pencil" (click)="editarExpProfissional(exPro, experienciaPro.indexOf(exPro))" severity="secondary" rounded />
                 <p-button icon="pi pi-trash" (click)="confirm($event, exPro, experienciaPro.indexOf(exPro))" severity="contrast" rounded />
               </td>

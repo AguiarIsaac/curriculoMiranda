@@ -40,7 +40,7 @@ export class FormacaoFormComponent {
   constructor(private fb: FormBuilder, private confirmationService: ConfirmationService) {
     this.dialogFormFormacao = this.fb.group({
       formacaoVal: ['', Validators.required],
-      descCursoVal: [''],
+      descCursoVal: ['', Validators.required],
       iniVal: ['', Validators.required],
       fimVal: [''],
       qtHrsVal: [''],

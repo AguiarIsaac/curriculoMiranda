@@ -84,11 +84,6 @@ body {
   gap: 1.5rem;
 }
 
-.table-button-container {
-  display: flex;
-  gap: 1.5rem;
-}
-
 .checkbox-container {
   display: flex;
   align-items: center;
@@ -101,6 +96,11 @@ body {
   flex-wrap: wrap;
   width: 100%;
   gap: 1.5rem;
+}
+
+.title-container{
+  display: flex;
+  width: 100%;
 }
 
 

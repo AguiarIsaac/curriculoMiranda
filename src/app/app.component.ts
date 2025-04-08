@@ -95,6 +95,7 @@ export class AppComponent implements OnInit{
         deficienciasVal: [{value: [], disabled: true}, Validators.required],
         otDeficienciasVal: [{value: '', disabled: true}],
         nesAjudaVal: ['N'],
+        aparelhoAudVal: ['N'],
         consideracoesVal: ['']
       }),
 
